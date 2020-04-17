@@ -101,7 +101,7 @@ public class ExportTsfileOneDay extends Thread
         name.add("tertiary_time");
         type.add("DOUBLE");
         type.add("DOUBLE");
-        String cql;
+        String cql = "";
         ResultSet resultSet;
         String csvname = "root." + getUsername() + "." + metric.host + "." + metric.host + "." + metric.metric;
         switch (metric.type)
@@ -356,6 +356,7 @@ public class ExportTsfileOneDay extends Thread
                 exportDataTable(dataTable,name,type,csvname,metric.host);
                 break;
         }
+        LOGGER.info(cql);
     }
 
     @Override
