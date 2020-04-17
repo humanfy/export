@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="main"  >
+<target name="main">
+  <copy todir="/home/humanfy/桌面/export/lib">
+    <fileset dir="/home/humanfy/桌面/export/target/">
+      <include name="*.jar"/>
+    </fileset>
+  </copy>
+</target>
+</project>
