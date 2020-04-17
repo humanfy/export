@@ -25,7 +25,7 @@ public class ExportToCsv
   	private static final Logger LOGGER = LoggerFactory.getLogger(ExportToCsv.class);
   	private static long startTime;
   	private static long endTime;
-  	public static String dirAbsolutePath = "/home/humanfy/export/res";
+  	public static String dirAbsolutePath = "/home/fy/export/res";
   	private static int dayNumber;
 	private static Cluster cluster;
   	public static void main(String[] args)

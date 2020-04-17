@@ -113,7 +113,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("INT32");
                 resultSet = session.execute(cql);
@@ -135,7 +135,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("INT64");
                 resultSet = session.execute(cql);
@@ -157,7 +157,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("FLOAT");
                 resultSet = session.execute(cql);
@@ -179,7 +179,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("DOUBLE");
                 resultSet = session.execute(cql);
@@ -201,7 +201,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
@@ -223,7 +223,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
@@ -254,7 +254,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("latitude");
                 type.add("DOUBLE");
                 name.add("longitude");
@@ -279,7 +279,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
@@ -310,7 +310,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
@@ -341,7 +341,7 @@ public class ExportTsfileOneDay extends Thread
                         + date
                         + "\' and metric = \'"
                         + metric.metric
-                        + ";\'";
+                        + "\';";
                 name.add("value");
                 type.add("BOOLEAN");
                 resultSet = session.execute(cql);
