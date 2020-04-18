@@ -5,9 +5,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+
 import org.apache.iotdb.tsfile.file.metadata.enums.TSDataType;
 import org.apache.iotdb.tsfile.file.metadata.enums.TSEncoding;
 import org.apache.iotdb.tsfile.utils.Binary;
@@ -39,7 +38,7 @@ public class TransToTsfile
         		File[] csvFiles = new File(dirPath).listFiles();
         		for (File csvFile : csvFiles)
         		{
-
+					Map<String,Boolean> tsFileMeasurement = new HashMap<>();
 					LOGGER.info("Name of csvfile: {}", csvFile.getName());
           			try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFile)))
 					{
@@ -47,7 +46,7 @@ public class TransToTsfile
             			String[] sensorFull = Arrays.copyOfRange(
             					header.split(","), 1, header.split(",").length);
             			ArrayList<String> sensorList = new ArrayList<>(Arrays.asList(sensorFull));
-            			String device = csvFile.getName();
+            			String device = csvFile.getName().replaceAll(".csv","");
 						List<TSDataType> tsDataTypes = Arrays.asList(new TSDataType[sensorList.size()]);
             			for (int i = 0; i < sensorList.size(); i++)
             			{
@@ -80,19 +79,19 @@ public class TransToTsfile
 						for (int i=0; i < tsDataTypes.size(); i++)
 							LOGGER.info("{} name: {}",i, sensorList.get(i));
             			String line;
-            			boolean set = false;
             			while ((line = csvReader.readLine()) != null)
             			{
               				long time = Long.parseLong(line.split(",")[0]);
               				TSRecord tsRecord = new TSRecord(time, device);
               				String[] points = Arrays.
-									copyOfRange(line.split(","), 1, line.split(",").length);
+									copyOfRange(line.split(",", sensorList.size() + 1), 1, sensorList.size());
 							for (int i=0; i < points.length; i++)
 								LOGGER.info("{} data point: {}", line, points[i]);
              			 	for (int i = 0; i < points.length; i++)
              			 	{
-                				if (!set)
+                				if (!tsFileMeasurement.containsKey(sensorList.get(i)))
                 				{
+									tsFileMeasurement.put(sensorList.get(i),true);
 									switch (tsDataTypes.get(i))
 									{
 										case INT32:
@@ -171,7 +170,6 @@ public class TransToTsfile
 							{
                 				LOGGER.error("write record error: {}, error csv: {}", e.getMessage(), csvFile.getAbsolutePath(), e);
               				}
-              				set = true;
             			}
           			}
         		}

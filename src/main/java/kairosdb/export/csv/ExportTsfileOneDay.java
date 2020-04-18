@@ -114,7 +114,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_INT32");
                 type.add("INT32");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -139,7 +139,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_INT64");
                 type.add("INT64");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -164,7 +164,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_FLOAT");
                 type.add("FLOAT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -189,7 +189,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_DOUBLE");
                 type.add("DOUBLE");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -214,7 +214,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_TEXT");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -239,7 +239,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_TEXT");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -301,7 +301,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_TEXT");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -335,7 +335,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_TEXT");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -369,7 +369,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value");
+                name.add("value_BOOLEAN");
                 type.add("BOOLEAN");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
