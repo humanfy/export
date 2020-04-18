@@ -102,9 +102,15 @@ public class ExportTsfileOneDay extends Thread
         type.add("DOUBLE");
         type.add("DOUBLE");
         String cql = "";
+
         ResultSet resultSet;
         String csvname = "root." + getUsername() + "." + metric.host + "." + metric.host + "." + metric.metric + ".csv";
         LOGGER.info("{}, {}, {}",metric.host,metric.metric,metric.type);
+        if (metric.type==null)
+        {
+            session.close();
+            return;
+        }
         switch (metric.type)
         {
             case "INT"://INT32
@@ -388,6 +394,7 @@ public class ExportTsfileOneDay extends Thread
                 break;
         }
         LOGGER.info(cql);
+        session.close();
     }
 
     @Override

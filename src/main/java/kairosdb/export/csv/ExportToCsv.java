@@ -69,11 +69,13 @@ public class ExportToCsv
 			ExecutorService executorService = new ThreadPoolExecutor(1, 1,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
 					new LinkedBlockingQueue<>(hosts.size()*dayNumber));
+			session.close();
 			for (String host : hosts)
 			{
+				Session session2 = cluster.connect();
 				List<Metric>  metriclist = new ArrayList();
 				cql = "SELECT * from sagittariuscty.latest where host = \'"+host+"\';";
-				resultSet = session.execute(cql);
+				resultSet = session2.execute(cql);
 				for (Row row : resultSet)
 				{
 					Metric tmp = new Metric();
@@ -99,7 +101,7 @@ public class ExportToCsv
 										startTime + (i + 1) * Constants.TIME_DAY,  downLatch, cluster, metriclist));
 					}
 				}
-
+				session2.close();
 			}
 			executorService.shutdown();
 			try
