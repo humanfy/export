@@ -42,21 +42,11 @@ public class ExportTsfileOneDay extends Thread
 
     private void exportDataTable(Map<Long, List<Object>> dataTable, List<String> name, List<String> type, String csvname, String hostname)
     {
-        if (!new File(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname ).exists())
-        {
-            new File(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname ).mkdir();
-           // LOGGER.info(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname );
-
-        }
-
         File file = new File(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname + File.separator + csvname);
-        if (!file.exists())
+
+        if (!file.getParentFile().exists())
         {
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            file.getParentFile().mkdirs();
         }
         LOGGER.info("正在导出 {} 行数据到 {} ...", dataTable.size(), csvname);
         try
@@ -92,7 +82,7 @@ public class ExportTsfileOneDay extends Thread
         }
         catch (IOException e)
         {
-            LOGGER.error("KairosDB数据导出为CSV文件失败", e);
+            LOGGER.error("数据导出为CSV文件失败", e);
             e.printStackTrace();
         }
         LOGGER.info("导出{}完成", csvname);
