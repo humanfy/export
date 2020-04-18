@@ -66,7 +66,7 @@ public class ExportToCsv
 			LOGGER.info("host数量: {}", hosts.size());
 			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
-					new LinkedBlockingQueue<>(4096));
+					new LinkedBlockingQueue<>(hosts.size()*dayNumber));
 			for (String host : hosts)
 			{
 				List<Metric>  metriclist = new ArrayList();

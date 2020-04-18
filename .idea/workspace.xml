@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportToCsv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportToCsv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportTsfileOneDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportTsfileOneDay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/conf/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/conf/Constants.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +93,7 @@
       <workItem from="1586602302293" duration="596000" />
       <workItem from="1586885760818" duration="10075000" />
       <workItem from="1586953211616" duration="459000" />
-      <workItem from="1586953705877" duration="30240000" />
+      <workItem from="1586953705877" duration="33093000" />
     </task>
     <servers />
   </component>

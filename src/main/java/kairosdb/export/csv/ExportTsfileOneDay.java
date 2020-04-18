@@ -124,10 +124,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     ins.add(row.getInt("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -152,10 +149,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     ins.add(row.getLong("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -180,10 +174,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     ins.add(row.getFloat("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -208,10 +199,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     ins.add(row.getDouble("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -236,10 +224,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     ins.add(row.getString("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -264,10 +249,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     Map<String,String> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(String.class));
                     ObjectMapper mapper = null;
                     try
@@ -303,10 +285,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     ins.add(row.getDouble("latitude"));
                     ins.add(row.getDouble("longitude"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
@@ -332,10 +311,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     Map<String,String> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(String.class));
                     ObjectMapper mapper = null;
                     try
@@ -369,10 +345,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     Map<String,Double> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(Double.class));
                     ObjectMapper mapper = null;
                     try
@@ -406,10 +379,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(-1);
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
-                    if (row.getTimestamp("candidate_id")==null)
-                        ins.add(-1);
-                    else
-                        ins.add(row.getLong("candidate_id"));
+                    ins.add(row.getLong("candidate_id"));
                     ins.add(row.getBool("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
