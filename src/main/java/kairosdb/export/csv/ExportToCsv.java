@@ -56,12 +56,14 @@ public class ExportToCsv
 			for (Row row : resultSet)
 				typ.put(row.getString("metric"),row.getString("value_type"));
 
+			LOGGER.info("metric数量", typ.size());
 			cql = "SELECT * from sagittariuscty.host;";
 			resultSet = session.execute(cql);
 			List<String> hosts = new ArrayList<>();
 			for (Row row : resultSet)
 				hosts.add(row.getString("host"));
 
+			LOGGER.info("host数量", hosts.size());
 			for (String host : hosts)
 			{
 				List<Metric>  metriclist = new ArrayList();
@@ -76,6 +78,7 @@ public class ExportToCsv
 					metriclist.add(tmp);
 				}
 
+				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
 				ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
 						Long.MAX_VALUE, TimeUnit.SECONDS,
 						new LinkedBlockingQueue<>(4096));
