@@ -64,6 +64,9 @@ public class ExportToCsv
 				hosts.add(row.getString("host"));
 
 			LOGGER.info("host数量: {}", hosts.size());
+			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
+					Long.MAX_VALUE, TimeUnit.SECONDS,
+					new LinkedBlockingQueue<>(4096));
 			for (String host : hosts)
 			{
 				List<Metric>  metriclist = new ArrayList();
@@ -79,9 +82,6 @@ public class ExportToCsv
 				}
 
 				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
-				ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
-						Long.MAX_VALUE, TimeUnit.SECONDS,
-						new LinkedBlockingQueue<>(4096));
 				for (long i = 0; i < dayNumber; i++)
 				{
 					if (i == dayNumber - 1)
@@ -97,15 +97,16 @@ public class ExportToCsv
 										startTime + (i + 1) * Constants.TIME_DAY,  downLatch, cluster, metriclist));
 					}
 				}
-				executorService.shutdown();
-				try
-				{
-					downLatch.await();
-				}
-				catch (InterruptedException e)
-				{
-					e.printStackTrace();
-				}
+
+			}
+			executorService.shutdown();
+			try
+			{
+				downLatch.await();
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
 			}
 		}
 		else

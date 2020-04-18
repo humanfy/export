@@ -103,7 +103,7 @@ public class ExportTsfileOneDay extends Thread
         type.add("DOUBLE");
         String cql = "";
         ResultSet resultSet;
-        String csvname = "root." + getUsername() + "." + metric.host + "." + metric.host + "." + metric.metric;
+        String csvname = "root." + getUsername() + "." + metric.host + "." + metric.host + "." + metric.metric + ".csv";
         switch (metric.type)
         {
             case "INT"://INT32
@@ -120,8 +120,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     ins.add(row.getInt("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -142,8 +148,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     ins.add(row.getLong("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -164,8 +176,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     ins.add(row.getFloat("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -186,8 +204,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     ins.add(row.getDouble("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -207,10 +231,15 @@ public class ExportTsfileOneDay extends Thread
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
                 {
-                    LOGGER.info("ROW : {}", row.toString());
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     ins.add(row.getString("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
@@ -231,8 +260,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     Map<String,String> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(String.class));
                     ObjectMapper mapper = null;
                     try
@@ -264,8 +299,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     ins.add(row.getDouble("latitude"));
                     ins.add(row.getDouble("longitude"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
@@ -287,8 +328,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     Map<String,String> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(String.class));
                     ObjectMapper mapper = null;
                     try
@@ -318,8 +365,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     Map<String,Double> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(Double.class));
                     ObjectMapper mapper = null;
                     try
@@ -349,8 +402,14 @@ public class ExportTsfileOneDay extends Thread
                 for (Row row : resultSet)
                 {
                     List<Object> ins = new ArrayList<>();
-                    ins.add(row.getTimestamp("secondary_time").getTime());
-                    ins.add(row.getLong("candidate_id"));
+                    if (row.getTimestamp("secondary_time")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getTimestamp("secondary_time").getTime());
+                    if (row.getTimestamp("candidate_id")==null)
+                        ins.add(-1);
+                    else
+                        ins.add(row.getLong("candidate_id"));
                     ins.add(row.getBool("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
