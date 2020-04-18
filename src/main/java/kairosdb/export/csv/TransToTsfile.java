@@ -39,6 +39,8 @@ public class TransToTsfile
         		File[] csvFiles = new File(dirPath).listFiles();
         		for (File csvFile : csvFiles)
         		{
+
+					LOGGER.info("Name of csvfile: {}", csvFile.getName());
           			try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFile)))
 					{
             			String header = csvReader.readLine();
@@ -73,6 +75,10 @@ public class TransToTsfile
 							}
               				sensorList.set(i, sensorList.get(i).split("\t")[0]);
             			}
+						for (int i=0; i < tsDataTypes.size(); i++)
+							LOGGER.info("{} type: {}",i, tsDataTypes.get(i).toString());
+						for (int i=0; i < tsDataTypes.size(); i++)
+							LOGGER.info("{} name: {}",i, sensorList.get(i));
             			String line;
             			boolean set = false;
             			while ((line = csvReader.readLine()) != null)
@@ -81,6 +87,8 @@ public class TransToTsfile
               				TSRecord tsRecord = new TSRecord(time, device);
               				String[] points = Arrays.
 									copyOfRange(line.split(","), 1, line.split(",").length);
+							for (int i=0; i < points.length; i++)
+								LOGGER.info("{} data point: {}", line, points[i]);
              			 	for (int i = 0; i < points.length; i++)
              			 	{
                 				if (!set)
