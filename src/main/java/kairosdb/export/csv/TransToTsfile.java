@@ -1,6 +1,5 @@
 package kairosdb.export.csv;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -74,10 +73,10 @@ public class TransToTsfile
 							}
               				sensorList.set(i, sensorList.get(i).split("\t")[0]);
             			}
-						for (int i=0; i < tsDataTypes.size(); i++)
-							LOGGER.info("{} type: {}",i, tsDataTypes.get(i).toString());
-						for (int i=0; i < tsDataTypes.size(); i++)
-							LOGGER.info("{} name: {}",i, sensorList.get(i));
+						//for (int i=0; i < tsDataTypes.size(); i++)
+						//	LOGGER.info("{} type: {}",i, tsDataTypes.get(i).toString());
+						//for (int i=0; i < tsDataTypes.size(); i++)
+						//	LOGGER.info("{} name: {}",i, sensorList.get(i));
             			String line;
             			while ((line = csvReader.readLine()) != null)
             			{
@@ -85,8 +84,8 @@ public class TransToTsfile
               				TSRecord tsRecord = new TSRecord(time, device);
               				String[] points = Arrays.
 									copyOfRange(line.split(",", sensorList.size() + 1), 1, sensorList.size());
-							for (int i=0; i < points.length; i++)
-								LOGGER.info("{} data point: {}", line, points[i]);
+							//for (int i=0; i < points.length; i++)
+							//	LOGGER.info("{} data point: {}", line, points[i]);
              			 	for (int i = 0; i < points.length; i++)
              			 	{
                 				if (!tsFileMeasurement.containsKey(sensorList.get(i)))

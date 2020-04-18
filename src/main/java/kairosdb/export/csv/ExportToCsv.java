@@ -25,7 +25,7 @@ public class ExportToCsv
   	private static final Logger LOGGER = LoggerFactory.getLogger(ExportToCsv.class);
   	private static long startTime;
   	private static long endTime;
-  	public static String dirAbsolutePath = "/home/fy/export/res";
+  	public static String dirAbsolutePath = "/data/fy/export/res";
   	private static int dayNumber;
 	private static Cluster cluster;
   	public static void main(String[] args)
@@ -66,7 +66,7 @@ public class ExportToCsv
 
 			LOGGER.info("host数量: {}", hosts.size());
 
-			ExecutorService executorService = new ThreadPoolExecutor(1, 1,
+			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
 					new LinkedBlockingQueue<>(hosts.size()*dayNumber));
 			session.close();
