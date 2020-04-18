@@ -56,14 +56,14 @@ public class ExportToCsv
 			for (Row row : resultSet)
 				typ.put(row.getString("metric"),row.getString("value_type"));
 
-			LOGGER.info("metric数量", typ.size());
+			LOGGER.info("metric数量: {}", typ.size());
 			cql = "SELECT * from sagittariuscty.host;";
 			resultSet = session.execute(cql);
 			List<String> hosts = new ArrayList<>();
 			for (Row row : resultSet)
 				hosts.add(row.getString("host"));
 
-			LOGGER.info("host数量", hosts.size());
+			LOGGER.info("host数量: {}", hosts.size());
 			for (String host : hosts)
 			{
 				List<Metric>  metriclist = new ArrayList();

@@ -207,6 +207,7 @@ public class ExportTsfileOneDay extends Thread
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
                 {
+                    LOGGER.info("ROW : {}", row.toString());
                     List<Object> ins = new ArrayList<>();
                     ins.add(row.getTimestamp("secondary_time").getTime());
                     ins.add(row.getLong("candidate_id"));
