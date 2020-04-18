@@ -258,7 +258,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(row.getTimestamp("secondary_time").getTime());
                     ins.add(row.getLong("candidate_id"));
                     Map<String,String> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(String.class));
-                    ObjectMapper mapper = null;
+                    ObjectMapper mapper = new ObjectMapper();
                     try
                     {
                         ins.add(mapper.writeValueAsString(insmap));
@@ -320,7 +320,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(row.getTimestamp("secondary_time").getTime());
                     ins.add(row.getLong("candidate_id"));
                     Map<String,String> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(String.class));
-                    ObjectMapper mapper = null;
+                    ObjectMapper mapper = new ObjectMapper();
                     try
                     {
                         ins.add(mapper.writeValueAsString(insmap));
@@ -354,7 +354,7 @@ public class ExportTsfileOneDay extends Thread
                         ins.add(row.getTimestamp("secondary_time").getTime());
                     ins.add(row.getLong("candidate_id"));
                     Map<String,Double> insmap = row.getMap("value", TypeToken.of(String.class), TypeToken.of(Double.class));
-                    ObjectMapper mapper = null;
+                    ObjectMapper mapper = new ObjectMapper();
                     try
                     {
                         ins.add(mapper.writeValueAsString(insmap));
