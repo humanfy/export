@@ -104,6 +104,7 @@ public class ExportTsfileOneDay extends Thread
         String cql = "";
         ResultSet resultSet;
         String csvname = "root." + getUsername() + "." + metric.host + "." + metric.host + "." + metric.metric + ".csv";
+        LOGGER.info(metric.toString());
         switch (metric.type)
         {
             case "INT"://INT32
