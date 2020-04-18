@@ -45,9 +45,19 @@ public class ExportTsfileOneDay extends Thread
         if (!new File(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname ).exists())
         {
             new File(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname ).mkdir();
+           // LOGGER.info(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname );
+
         }
 
         File file = new File(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator + startTime + File.separator + hostname + File.separator + csvname);
+        if (!file.exists())
+        {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         LOGGER.info("正在导出 {} 行数据到 {} ...", dataTable.size(), csvname);
         try
         {
@@ -436,6 +446,6 @@ public class ExportTsfileOneDay extends Thread
 
     private String getUsername()
     {
-        return "cty";
+        return "CTY";
     }
 }
