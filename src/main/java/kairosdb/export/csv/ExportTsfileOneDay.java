@@ -9,12 +9,23 @@ import com.google.common.reflect.TypeToken;
 import kairosdb.export.csv.conf.Config;
 import kairosdb.export.csv.conf.ConfigDescriptor;
 import kairosdb.export.csv.conf.Constants;
+import org.apache.iotdb.tsfile.file.metadata.enums.TSDataType;
+import org.apache.iotdb.tsfile.file.metadata.enums.TSEncoding;
+import org.apache.iotdb.tsfile.utils.Binary;
+import org.apache.iotdb.tsfile.write.TsFileWriter;
+import org.apache.iotdb.tsfile.write.record.TSRecord;
+import org.apache.iotdb.tsfile.write.record.datapoint.*;
+import org.apache.iotdb.tsfile.write.schema.MeasurementSchema;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.codehaus.jackson.map.ObjectMapper;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -29,6 +40,7 @@ public class ExportTsfileOneDay extends Thread
     private CountDownLatch downLatch;
     private Cluster cluster;
     private List<Metric> metriclist;
+    private boolean insertIotdb = true;
 
     public ExportTsfileOneDay(long startTime, long endTime, CountDownLatch downLatch, Cluster cluster,
                               List<Metric>  metriclist)
@@ -419,12 +431,20 @@ public class ExportTsfileOneDay extends Thread
 
     private void deleteFile(String host)
     {
-        String tsFilePath = ExportToCsv.dirAbsolutePath + File.separator + Constants.SEQUENCE_DIR + File.separator
-                + host + File.separator
-                + String.format(Constants.TSFILE_FILE_NAME, startTime, 0, 0);
-        TransToTsfile.transToTsfile(
-        ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator
-            + startTime + File.separator + host, tsFilePath);
+    	if (insertIotdb)
+		{
+			InsertintoIotdb.insertintoIotdb(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator
+					+ startTime + File.separator + host);
+		}
+    	else
+		{
+			String tsFilePath = ExportToCsv.dirAbsolutePath + File.separator + Constants.SEQUENCE_DIR + File.separator
+					+ host + File.separator
+					+ String.format(Constants.TSFILE_FILE_NAME, startTime, 0, 0);
+			TransToTsfile.transToTsfile(
+					ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator
+							+ startTime + File.separator + host, tsFilePath);
+		}
         if (config.DELETE_CSV)
         {
             File[] files = new File(ExportToCsv.dirAbsolutePath + File.separator + Constants.CSV_DIR + File.separator
@@ -476,4 +496,6 @@ public class ExportTsfileOneDay extends Thread
     {
         return "CTY";
     }
+
+
 }
