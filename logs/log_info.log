@@ -1,3 +1,0 @@
-2020-04-16 06:21:35,861 INFO  com.datastax.driver.core.NettyUtil:83 - Did not find Netty's native epoll transport in the classpath, defaulting to NIO. 
-2020-04-16 06:21:36,531 INFO  com.datastax.driver.core.policies.DCAwareRoundRobinPolicy:95 - Using data-center name 'datacenter1' for DCAwareRoundRobinPolicy (if this is incorrect, please provide the correct datacenter name with DCAwareRoundRobinPolicy constructor) 
-2020-04-16 06:21:36,534 INFO  com.datastax.driver.core.Cluster$Manager:1475 - New Cassandra host /127.0.0.1:9042 added 

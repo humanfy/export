@@ -128,19 +128,26 @@ public class InsertintoIotdb {
 									case "TEXT":
 										Binary[] sensor6 = (Binary []) values[i];
 										sensor6[row] =  Binary.valueOf(points[i]);
-										LOGGER.info("{} {}",points[i],sensor6[row].toString());
 										break;
 								}
 							}
 						}
-						session.insertBatch(rowBatch);
+						try {
+							session.insertBatch(rowBatch);
+						}
+						catch (Exception e) {
+
+							LOGGER.error("{} {}", e, rowBatch.deviceId);
+							for (int i=0;i<rowBatch.measurements.size();i++)
+								LOGGER.error(rowBatch.measurements.get(i).toString());
+						}
 						rowBatch.reset();
 					}
 				}
 			}
 			catch(Exception e)
 			{
-				LOGGER.error("insert error", e);
+				LOGGER.error("insert error ", e, dirPath);
 			}
 			session.close();
 		}
