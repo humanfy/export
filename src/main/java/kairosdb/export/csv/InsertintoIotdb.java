@@ -102,28 +102,33 @@ public class InsertintoIotdb {
 
 							for (int i = 0; i < points.length; i++)
 							{
-								Object[] sensor = (Object[]) values[i];
 								if (points[i].equals(""))
 									continue;
 								switch (sensorList.get(i).split("\t")[1])
 								{
 									case "INT32":
+										int[] sensor = (int[]) values[i];
 										sensor[row] = Integer.parseInt(points[i]);
 										break;
 									case "INT64":
-										sensor[row] = Long.parseLong(points[i]);
+										long[] sensor2 = (long[]) values[i];
+										sensor2[row] = Long.parseLong(points[i]);
 										break;
 									case "FLOAT":
-										sensor[row] = Float.parseFloat(points[i]);
+										float[] sensor3 = (float[]) values[i];
+										sensor3[row] = Float.parseFloat(points[i]);
 										break;
 									case "DOUBLE":
-										sensor[row] = Double.parseDouble(points[i]);
+										double[] sensor4 = (double[]) values[i];
+										sensor4[row] = Double.parseDouble(points[i]);
 										break;
 									case "BOOLEAN":
-										sensor[row] = Boolean.parseBoolean(points[i]);
+										boolean[] sensor5 = (boolean []) values[i];
+										sensor5[row] = Boolean.parseBoolean(points[i]);
 										break;
 									case "TEXT":
-										sensor[row] =  Binary.valueOf(points[i]);
+										Binary[] sensor6 = (Binary []) values[i];
+										sensor6[row] =  Binary.valueOf(points[i]);
 										break;
 								}
 							}
