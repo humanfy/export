@@ -123,7 +123,7 @@ public class InsertintoIotdb {
 										sensor[row] = Boolean.parseBoolean(points[i]);
 										break;
 									case "TEXT":
-										sensor[row] = points[i];
+										sensor[row] =  Binary.valueOf(points[i]);
 										break;
 								}
 							}
