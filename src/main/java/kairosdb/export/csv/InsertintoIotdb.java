@@ -86,7 +86,6 @@ public class InsertintoIotdb {
 									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\t")[0], TSDataType.BOOLEAN, TSEncoding.PLAIN));
 									break;
 							}
-							sensorList.set(i, sensorList.get(i).split("\t")[0]);
 						}
 						RowBatch rowBatch = schema.createRowBatch(device, lines);
 						String line;
@@ -129,6 +128,7 @@ public class InsertintoIotdb {
 									case "TEXT":
 										Binary[] sensor6 = (Binary []) values[i];
 										sensor6[row] =  Binary.valueOf(points[i]);
+										LOGGER.info("{} {}",points[i],sensor6[row].toString());
 										break;
 								}
 							}
