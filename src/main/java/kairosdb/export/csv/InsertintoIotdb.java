@@ -49,7 +49,7 @@ public class InsertintoIotdb {
 						int lines=0;
 						try(Stream<String> stream = Files.lines(Paths.get(String.valueOf(csvFile)))){
 
-							lines = (int)stream.count();
+							lines = (int)stream.count()-1;
 
 						} catch (IOException e)
 						{
@@ -140,6 +140,7 @@ public class InsertintoIotdb {
 
 							LOGGER.error("error ",e);
 							LOGGER.error(rowBatch.deviceId);
+							LOGGER.error("{}",rowBatch.batchSize);
 							for (int i=0;i<rowBatch.measurements.size();i++)
 								LOGGER.error(rowBatch.measurements.get(i).toString());
 
