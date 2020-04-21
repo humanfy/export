@@ -133,24 +133,7 @@ public class InsertintoIotdb {
 								}
 							}
 						}
-						try {
-							session.insertBatch(rowBatch);
-						}
-						catch (Exception e) {
-
-							LOGGER.error("error ",e);
-							LOGGER.error(rowBatch.deviceId);
-							LOGGER.error("{}",rowBatch.batchSize);
-							for (int i=0;i<rowBatch.measurements.size();i++)
-								LOGGER.error(rowBatch.measurements.get(i).toString());
-
-							Binary[] sensor6 = (Binary []) values[2];
-							LOGGER.error("{}",sensor6.length);
-							for (int i=0;i<sensor6.length;i++)
-							{
-								LOGGER.error(sensor6[i].toString());
-							}
-						}
+						session.insertBatch(rowBatch);
 						rowBatch.reset();
 					}
 				}
