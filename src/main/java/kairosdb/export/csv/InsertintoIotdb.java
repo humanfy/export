@@ -126,6 +126,7 @@ public class InsertintoIotdb {
 										sensor5[row] = Boolean.parseBoolean(points[i]);
 										break;
 									case "TEXT":
+										LOGGER.error(Binary.valueOf(points[i]).toString());
 										Binary[] sensor6 = (Binary []) values[i];
 										sensor6[row] =  Binary.valueOf(points[i]);
 										break;
@@ -142,7 +143,7 @@ public class InsertintoIotdb {
 								LOGGER.error(rowBatch.measurements.get(i).toString());
 
 							Binary[] sensor6 = (Binary []) values[2];
-							LOGGER.error("?????");
+							LOGGER.error("{}",sensor6.length);
 							for (int i=0;i<sensor6.length;i++)
 							{
 								LOGGER.error(sensor6[i].toString());
