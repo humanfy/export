@@ -142,6 +142,7 @@ public class InsertintoIotdb {
 								LOGGER.error(rowBatch.measurements.get(i).toString());
 
 							Binary[] sensor6 = (Binary []) values[2];
+							LOGGER.error("?????");
 							for (int i=0;i<sensor6.length;i++)
 							{
 								LOGGER.error(sensor6[i].toString());
@@ -153,7 +154,7 @@ public class InsertintoIotdb {
 			}
 			catch(Exception e)
 			{
-				LOGGER.error("insert error ", e, dirPath);
+				LOGGER.error("insert error ", e);
 			}
 			session.close();
 		}
