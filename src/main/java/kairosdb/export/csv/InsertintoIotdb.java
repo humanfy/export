@@ -101,9 +101,9 @@ public class InsertintoIotdb {
 
 							for (int i = 0; i < points.length; i++)
 							{
+								LOGGER.error("{} {}",i,sensorList.get(i));
 								if (points[i].equals(""))
 									continue;
-								LOGGER.error(sensorList.get(i).split("\t")[1]);
 								switch (sensorList.get(i).split("\t")[1])
 								{
 									case "INT32":
