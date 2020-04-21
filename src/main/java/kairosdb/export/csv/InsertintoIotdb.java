@@ -103,6 +103,7 @@ public class InsertintoIotdb {
 							{
 								if (points[i].equals(""))
 									continue;
+								LOGGER.error(sensorList.get(i).split("\t")[1]);
 								switch (sensorList.get(i).split("\t")[1])
 								{
 									case "INT32":
