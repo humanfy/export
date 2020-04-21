@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73c241fd-82d9-49f6-822e-5b9aaa7b81da" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/TransToTsfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/TransToTsfile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +92,7 @@
       <workItem from="1586953211616" duration="459000" />
       <workItem from="1586953705877" duration="45571000" />
       <workItem from="1587484379558" duration="12566000" />
-      <workItem from="1587498069868" duration="3261000" />
+      <workItem from="1587498069868" duration="3530000" />
     </task>
     <servers />
   </component>

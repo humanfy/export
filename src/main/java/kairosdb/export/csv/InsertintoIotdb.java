@@ -101,7 +101,7 @@ public class InsertintoIotdb {
 
 							for (int i = 0; i < points.length; i++)
 							{
-								//LOGGER.error("{} {}",i,sensorList.get(i));
+								LOGGER.error("{} {}",i,sensorList.get(i));
 								if (points[i].equals(""))
 									continue;
 								switch (sensorList.get(i).split("\t")[1])
