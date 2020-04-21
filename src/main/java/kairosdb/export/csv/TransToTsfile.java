@@ -83,7 +83,7 @@ public class TransToTsfile
               				long time = Long.parseLong(line.split(",")[0]);
               				TSRecord tsRecord = new TSRecord(time, device);
               				String[] points = Arrays.
-									copyOfRange(line.split(",", sensorList.size() + 1), 1, sensorList.size());
+									copyOfRange(line.split(",", sensorList.size() + 1), 1, sensorList.size()+1);
 							//for (int i=0; i < points.length; i++)
 							//	LOGGER.info("{} data point: {}", line, points[i]);
              			 	for (int i = 0; i < points.length; i++)
