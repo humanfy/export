@@ -66,7 +66,7 @@ public class ExportToCsv
 
 			LOGGER.info("host数量: {}", hosts.size());
 
-			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
+			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
 					new LinkedBlockingQueue<>(hosts.size()*dayNumber));
 			session.close();
