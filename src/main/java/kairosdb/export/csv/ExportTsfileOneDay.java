@@ -40,7 +40,7 @@ public class ExportTsfileOneDay extends Thread
     private CountDownLatch downLatch;
     private Cluster cluster;
     private List<Metric> metriclist;
-    private boolean insertIotdb = true;
+    private boolean insertIotdb = false;
 
     public ExportTsfileOneDay(long startTime, long endTime, CountDownLatch downLatch, Cluster cluster,
                               List<Metric>  metriclist)
