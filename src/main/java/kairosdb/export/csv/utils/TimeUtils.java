@@ -5,9 +5,6 @@ import org.joda.time.DateTime;
 
 public class TimeUtils {
 
-  public static long generateTimestamp(long startTime, long interval, long index) {
-    return startTime + interval * index;
-  }
 
   public static long convertDateStrToTimestamp(String dateStr) {
     DateTime dateTime = new DateTime(dateStr);
@@ -21,10 +18,5 @@ public class TimeUtils {
     return (int) Math.ceil((float) (endTime - startTime) / Constants.TIME_DAY);
   }
 
-  public static void main(String[] args) {
-    long startTime = convertDateStrToTimestamp("2006-01-26T13:30:00+08:00");
-    long endTime = convertDateStrToTimestamp("2006-01-27T13:30:01+08:00");
-    System.out.println(timeRange(startTime, endTime));
-  }
 
 }

@@ -73,10 +73,6 @@ public class TransToTsfile
 							}
               				sensorList.set(i, sensorList.get(i).split("\t")[0]);
             			}
-						//for (int i=0; i < tsDataTypes.size(); i++)
-						//	LOGGER.info("{} type: {}",i, tsDataTypes.get(i).toString());
-						//for (int i=0; i < tsDataTypes.size(); i++)
-						//	LOGGER.info("{} name: {}",i, sensorList.get(i));
             			String line;
             			while ((line = csvReader.readLine()) != null)
             			{
@@ -84,8 +80,6 @@ public class TransToTsfile
               				TSRecord tsRecord = new TSRecord(time, device);
               				String[] points = Arrays.
 									copyOfRange(line.split(",", sensorList.size() + 1), 1, sensorList.size()+1);
-							//for (int i=0; i < points.length; i++)
-							//	LOGGER.info("{} data point: {}", line, points[i]);
              			 	for (int i = 0; i < points.length; i++)
              			 	{
                 				if (!tsFileMeasurement.containsKey(sensorList.get(i)))
@@ -168,6 +162,7 @@ public class TransToTsfile
               				catch (Exception e)
 							{
                 				LOGGER.error("write record error: {}, error csv: {}", e.getMessage(), csvFile.getAbsolutePath(), e);
+                				e.printStackTrace();
               				}
             			}
           			}
@@ -177,6 +172,7 @@ public class TransToTsfile
   		catch (Exception e)
 		{
       		LOGGER.error("error occurs when generate tsfile", e);
+      		e.printStackTrace();
     	}
   	}
 

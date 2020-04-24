@@ -1,19 +1,12 @@
 package kairosdb.export.csv;
 
-import org.apache.iotdb.rpc.IoTDBRPCException;
-import org.apache.iotdb.session.IoTDBSessionException;
-import org.apache.iotdb.session.SessionDataSet;
-import org.apache.iotdb.tsfile.file.metadata.enums.CompressionType;
 import org.apache.iotdb.tsfile.file.metadata.enums.TSDataType;
 import org.apache.iotdb.tsfile.file.metadata.enums.TSEncoding;
 import org.apache.iotdb.tsfile.utils.Binary;
 import org.apache.iotdb.tsfile.write.record.RowBatch;
-import org.apache.iotdb.tsfile.write.record.TSRecord;
-import org.apache.iotdb.tsfile.write.record.datapoint.*;
 import org.apache.iotdb.tsfile.write.schema.MeasurementSchema;
 import org.apache.iotdb.tsfile.write.schema.Schema;
 import org.apache.iotdb.session.Session;
-import org.apache.thrift.TException;
 
 import java.io.*;
 
@@ -25,7 +18,8 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Stream;
 
-public class InsertintoIotdb {
+public class InsertintoIotdb
+{
 	private static final Logger LOGGER = LoggerFactory.getLogger(TransToTsfile.class);
 	public static void insertintoIotdb(String dirPath)
 	{
@@ -101,32 +95,42 @@ public class InsertintoIotdb {
 
 							for (int i = 0; i < points.length; i++)
 							{
-								if (points[i].equals(""))
-									continue;
 								switch (sensorList.get(i).split("\t")[1])
 								{
 									case "INT32":
+
+										if (points[i].equals(""))
+											points[i]="-1";
 										int[] sensor = (int[]) values[i];
 										sensor[row] = Integer.parseInt(points[i]);
 										break;
 									case "INT64":
+										if (points[i].equals(""))
+											points[i]="-1";
 										long[] sensor2 = (long[]) values[i];
 										sensor2[row] = Long.parseLong(points[i]);
 										break;
 									case "FLOAT":
+										if (points[i].equals(""))
+											points[i]="-1";
 										float[] sensor3 = (float[]) values[i];
 										sensor3[row] = Float.parseFloat(points[i]);
 										break;
 									case "DOUBLE":
+										if (points[i].equals(""))
+											points[i]="-1";
 										double[] sensor4 = (double[]) values[i];
 										sensor4[row] = Double.parseDouble(points[i]);
 										break;
 									case "BOOLEAN":
+										if (points[i].equals(""))
+											points[i]="false";
 										boolean[] sensor5 = (boolean []) values[i];
 										sensor5[row] = Boolean.parseBoolean(points[i]);
 										break;
 									case "TEXT":
-										//LOGGER.error(Binary.valueOf(points[i]).toString());
+										if (points[i].equals(""))
+											points[i]="";
 										Binary[] sensor6 = (Binary []) values[i];
 										sensor6[row] =  Binary.valueOf(points[i]);
 										break;
@@ -138,15 +142,17 @@ public class InsertintoIotdb {
 					}
 				}
 			}
-			catch(Exception e)
+			catch (Exception e)
 			{
 				LOGGER.error("insert error ", e);
+				e.printStackTrace();
 			}
 			session.close();
 		}
 		catch (Exception e)
 		{
 			LOGGER.error("error occurs when writing to iotdb", e);
+			e.printStackTrace();
 		}
 	}
 

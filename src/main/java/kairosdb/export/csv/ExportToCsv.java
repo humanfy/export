@@ -1,7 +1,6 @@
 package kairosdb.export.csv;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,7 +24,6 @@ public class ExportToCsv
   	private static final Logger LOGGER = LoggerFactory.getLogger(ExportToCsv.class);
   	private static long startTime;
   	private static long endTime;
-  	public static String dirAbsolutePath = "/data/fy3/export/res";
   	private static int dayNumber;
 	private static Cluster cluster;
   	public static void main(String[] args)
@@ -36,9 +34,9 @@ public class ExportToCsv
 			System.exit(1);
 		}
 		config = ConfigDescriptor.getInstance().getConfig();
-		if (!new File(dirAbsolutePath + File.separator + Constants.CSV_DIR).exists())
+		if (!new File(config.dirAbsolutePath + File.separator + Constants.CSV_DIR).exists())
 		{
-	  		new File(dirAbsolutePath + File.separator + Constants.CSV_DIR).mkdir();
+	  		new File(config.dirAbsolutePath + File.separator + Constants.CSV_DIR).mkdir();
 		}
 		if (!config.START_TIME.equals("") && !config.ENDED_TIME.equals(""))
 		{
@@ -85,21 +83,11 @@ public class ExportToCsv
 					metriclist.add(tmp);
 				}
 
-				//LOGGER.info("host {}: 数量 {}", host, metriclist.size());
+				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
 				for (long i = 0; i < dayNumber; i++)
 				{
-					if (i == dayNumber - 1)
-					{
-						executorService.submit(
-								new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
-										endTime, downLatch, cluster, metriclist));
-					}
-					else
-					{
-						executorService.submit(
-								new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
-										startTime + (i + 1) * Constants.TIME_DAY,  downLatch, cluster, metriclist));
-					}
+					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
+										downLatch, cluster, metriclist));
 				}
 				session2.close();
 			}

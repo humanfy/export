@@ -5,6 +5,7 @@ kairosdb/export/csv/utils/TimeUtils.class
 kairosdb/export/csv/conf/Constants.class
 kairosdb/export/csv/InsertintoIotdb.class
 kairosdb/export/csv/TransToTsfile$1.class
+kairosdb/export/csv/ExportTsfileOneDay$MapKeyComparator.class
 kairosdb/export/csv/conf/ConfigDescriptor$ConfigDescriptorHolder.class
 kairosdb/export/csv/conf/Config.class
 kairosdb/export/csv/conf/ConfigDescriptor.class
