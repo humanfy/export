@@ -490,7 +490,7 @@ public class ExportTsfileOneDay extends Thread
 
     public static Map<Long, List<Object>> sortMapByKey(Map<Long, List<Object>> map)
     {
-        if (map == null || map.isEmpty())
+        if (map == null)
         {
             return null;
         }
