@@ -144,7 +144,7 @@ public class InsertintoIotdb
 			}
 			catch (Exception e)
 			{
-				LOGGER.error("insert error ", e);
+				LOGGER.error("insert error in {}", dirPath);
 				e.printStackTrace();
 			}
 			session.close();
@@ -155,5 +155,4 @@ public class InsertintoIotdb
 			e.printStackTrace();
 		}
 	}
-
 }

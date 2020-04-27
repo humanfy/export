@@ -106,7 +106,7 @@ public class ExportTsfileOneDay extends Thread
         LOGGER.info("{}, {}, {}",metric.host,metric.metric,metric.type);
         if (metric.type==null)
         {
-            LOGGER.error("没有找到 {} 工况的类型", metric.metric);
+            LOGGER.info("没有找到 {} 工况的类型", metric.metric);
             session.close();
             return;
         }
