@@ -112,7 +112,7 @@ public class ExportTsfileOneDay extends Thread
         }
         switch (metric.type)
         {
-            case "INT"://INT32
+            case "INT"://INT64
                 cql = "select * from sagittariuscty.data_int where host = \'"
                         + metric.host
                         + "\' and time_slice = \'"
@@ -120,8 +120,8 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_INT32");
-                type.add("INT32");
+                name.add("valueInt64");
+                type.add("INT64");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
                 {
@@ -131,7 +131,7 @@ public class ExportTsfileOneDay extends Thread
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
                     ins.add(row.getLong("candidate_id"));
-                    ins.add(row.getInt("value"));
+                    ins.add((long)row.getInt("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
                 exportDataTable(dataTable,name,type,csvname,metric.host);
@@ -145,7 +145,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_INT64");
+                name.add("valueInt64");
                 type.add("INT64");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -162,7 +162,7 @@ public class ExportTsfileOneDay extends Thread
                 exportDataTable(dataTable,name,type,csvname,metric.host);
                 break;
 
-            case "FLOAT"://FLOAT
+            case "FLOAT"://DOUBLE
                 cql = "select * from sagittariuscty.data_float where host = \'"
                         + metric.host
                         + "\' and time_slice = \'"
@@ -170,8 +170,8 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_FLOAT");
-                type.add("FLOAT");
+                name.add("valueDouble");
+                type.add("DOUBLE");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
                 {
@@ -181,7 +181,7 @@ public class ExportTsfileOneDay extends Thread
                     else
                         ins.add(row.getTimestamp("secondary_time").getTime());
                     ins.add(row.getLong("candidate_id"));
-                    ins.add(row.getFloat("value"));
+                    ins.add((double)row.getFloat("value"));
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
                 }
                 exportDataTable(dataTable,name,type,csvname,metric.host);
@@ -195,7 +195,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_DOUBLE");
+                name.add("valueDouble");
                 type.add("DOUBLE");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -220,7 +220,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_TEXT");
+                name.add("valueText");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -245,7 +245,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_TEXT");
+                name.add("valueText");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -264,6 +264,7 @@ public class ExportTsfileOneDay extends Thread
                     }
                     catch (IOException e)
                     {
+                        LOGGER.error("Map 类型转换发生异常 ： {}, cql : {}", insmap,cql );
                         e.printStackTrace();
                     }
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
@@ -307,7 +308,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_TEXT");
+                name.add("valueText");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -326,6 +327,7 @@ public class ExportTsfileOneDay extends Thread
                     }
                     catch (IOException e)
                     {
+                        LOGGER.error("Map 类型转换发生异常 ： {}, cql : {}", insmap,cql );
                         e.printStackTrace();
                     }
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);
@@ -341,7 +343,7 @@ public class ExportTsfileOneDay extends Thread
                         + "\' and metric = \'"
                         + metric.metric
                         + "\';";
-                name.add("value_TEXT");
+                name.add("valueText");
                 type.add("TEXT");
                 resultSet = session.execute(cql);
                 for (Row row : resultSet)
@@ -360,6 +362,7 @@ public class ExportTsfileOneDay extends Thread
                     }
                     catch (IOException e)
                     {
+                        LOGGER.error("Map 类型转换发生异常 ： {}, cql : {}", insmap,cql );
                         e.printStackTrace();
                     }
                     dataTable.put(row.getTimestamp("primary_time").getTime(),ins);

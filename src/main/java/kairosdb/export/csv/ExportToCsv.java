@@ -44,7 +44,7 @@ public class ExportToCsv
 	  		endTime = TimeUtils.convertDateStrToTimestamp(config.ENDED_TIME);
 	  		dayNumber = TimeUtils.timeRange(startTime, endTime);
 	  		CountDownLatch downLatch = new CountDownLatch(dayNumber);
-	  		cluster = Cluster.builder().addContactPoints("127.0.0.1").
+	  		cluster = Cluster.builder().addContactPoints("192.168.35.26").
 					withPort(9042).withCredentials("cassandra", "cassandra").build();
 	  		Session session = cluster.connect();
 
@@ -68,28 +68,28 @@ public class ExportToCsv
 					Long.MAX_VALUE, TimeUnit.SECONDS,
 					new LinkedBlockingQueue<>(hosts.size()*dayNumber));
 			session.close();
-			for (String host : hosts)
-			{
-				Session session2 = cluster.connect();
-				List<Metric>  metriclist = new ArrayList();
-				cql = "SELECT * from sagittariuscty.latest where host = \'"+host+"\';";
-				resultSet = session2.execute(cql);
-				for (Row row : resultSet)
-				{
-					Metric tmp = new Metric();
-					tmp.host = row.getString("host");
-					tmp.metric = row.getString("metric");
-					tmp.type = typ.get(tmp.metric);
-					metriclist.add(tmp);
-				}
 
-				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
-				for (long i = 0; i < dayNumber; i++)
+			for (long i = 0; i < dayNumber; i++)
+			{
+				for (String host : hosts)
 				{
+					Session session2 = cluster.connect();
+					List<Metric>  metriclist = new ArrayList();
+					cql = "SELECT * from sagittariuscty.latest where host = \'"+host+"\';";
+					resultSet = session2.execute(cql);
+					for (Row row : resultSet)
+					{
+						Metric tmp = new Metric();
+						tmp.host = row.getString("host");
+						tmp.metric = row.getString("metric");
+						tmp.type = typ.get(tmp.metric);
+						metriclist.add(tmp);
+					}
+					LOGGER.info("host {}: 数量 {}", host, metriclist.size());
 					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
 										downLatch, cluster, metriclist));
+					session2.close();
 				}
-				session2.close();
 			}
 			executorService.shutdown();
 			try
