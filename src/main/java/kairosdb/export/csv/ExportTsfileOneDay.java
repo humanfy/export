@@ -54,7 +54,7 @@ public class ExportTsfileOneDay extends Thread
                 StringBuilder headBuilder = new StringBuilder();
                 headBuilder.append("Time");
                 for (int i = 0; i < name.size(); i++) {
-                    headBuilder.append(",").append(name.get(i)+"\t"+type.get(i));
+                    headBuilder.append(",").append(name.get(i)+"\1"+type.get(i));
                 }
                 headBuilder.append("\n");
                 writer.write(headBuilder.toString());

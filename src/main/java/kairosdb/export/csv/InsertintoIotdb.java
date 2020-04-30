@@ -58,26 +58,26 @@ public class InsertintoIotdb
 						ArrayList<String> sensorList = new ArrayList<>(Arrays.asList(sensorFull));
 						for (int i = 0; i < sensorList.size(); i++)
 						{
-							String type = sensorList.get(i).split("\t")[1];
+							String type = sensorList.get(i).split("\1")[1];
 							switch (type)
 							{
 								case "INT32":
-									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\t")[0], TSDataType.INT32, TSEncoding.RLE));
+									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\1")[0], TSDataType.INT32, TSEncoding.RLE));
 									break;
 								case "INT64":
-									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\t")[0], TSDataType.INT64, TSEncoding.RLE));
+									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\1")[0], TSDataType.INT64, TSEncoding.RLE));
 									break;
 								case "FLOAT":
-									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\t")[0], TSDataType.FLOAT, TSEncoding.GORILLA));
+									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\1")[0], TSDataType.FLOAT, TSEncoding.GORILLA));
 									break;
 								case "DOUBLE":
-									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\t")[0], TSDataType.DOUBLE, TSEncoding.GORILLA));
+									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\1")[0], TSDataType.DOUBLE, TSEncoding.GORILLA));
 									break;
 								case "TEXT":
-									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\t")[0], TSDataType.TEXT, TSEncoding.PLAIN));
+									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\1")[0], TSDataType.TEXT, TSEncoding.PLAIN));
 									break;
 								case "BOOLEAN":
-									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\t")[0], TSDataType.BOOLEAN, TSEncoding.PLAIN));
+									schema.registerMeasurement(new MeasurementSchema(sensorList.get(i).split("\1")[0], TSDataType.BOOLEAN, TSEncoding.PLAIN));
 									break;
 							}
 						}
@@ -95,7 +95,7 @@ public class InsertintoIotdb
 
 							for (int i = 0; i < points.length; i++)
 							{
-								switch (sensorList.get(i).split("\t")[1])
+								switch (sensorList.get(i).split("\1")[1])
 								{
 									case "INT32":
 

@@ -2,34 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73c241fd-82d9-49f6-822e-5b9aaa7b81da" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_iotdb_iotdb_session_0_9_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_iotdb_iotdb_session_0_9_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_iotdb_service_rpc_0_9_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_iotdb_service_rpc_0_9_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_thrift_libthrift_0_9_3.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_thrift_libthrift_0_13_0.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/conf/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/conf/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/export.iml" beforeDir="false" afterPath="$PROJECT_DIR$/export.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportToCsv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportToCsv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportTsfileOneDay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportTsfileOneDay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/antrun/build-main.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/ExportToCsv.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/ExportTsfileOneDay$MapKeyComparator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/ExportTsfileOneDay.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/InsertintoIotdb.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/Metric.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/TransToTsfile$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/TransToTsfile.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/conf/CommandCli.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/conf/Config.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/conf/ConfigDescriptor$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/conf/ConfigDescriptor$ConfigDescriptorHolder.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/conf/ConfigDescriptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/conf/Constants.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/utils/TimeUtils.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/export-1.0-SNAPSHOT.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/TransToTsfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/TransToTsfile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +114,7 @@
       <workItem from="1587932829419" duration="599000" />
       <workItem from="1588020614058" duration="4045000" />
       <workItem from="1588192199593" duration="1932000" />
-      <workItem from="1588273514592" duration="1692000" />
+      <workItem from="1588273514592" duration="2602000" />
     </task>
     <servers />
   </component>

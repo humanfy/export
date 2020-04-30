@@ -35,9 +35,9 @@ public class TransToTsfile
           			return;
         		}
         		File[] csvFiles = new File(dirPath).listFiles();
+				Map<String,Boolean> tsFileMeasurement = new HashMap<>();
         		for (File csvFile : csvFiles)
         		{
-					Map<String,Boolean> tsFileMeasurement = new HashMap<>();
 					LOGGER.info("Name of csvfile: {}", csvFile.getName());
           			try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFile)))
 					{
@@ -49,7 +49,7 @@ public class TransToTsfile
 						List<TSDataType> tsDataTypes = Arrays.asList(new TSDataType[sensorList.size()]);
             			for (int i = 0; i < sensorList.size(); i++)
             			{
-            				String type = sensorList.get(i).split("\t")[1];
+            				String type = sensorList.get(i).split("\1")[1];
             				switch (type)
 							{
 								case "INT32":
@@ -71,7 +71,7 @@ public class TransToTsfile
 									tsDataTypes.set(i, TSDataType.BOOLEAN);
 									break;
 							}
-              				sensorList.set(i, sensorList.get(i).split("\t")[0]);
+              				sensorList.set(i, sensorList.get(i).split("\1")[0]);
             			}
             			String line;
             			while ((line = csvReader.readLine()) != null)
