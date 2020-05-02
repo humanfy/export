@@ -4,6 +4,7 @@
     <list default="true" id="73c241fd-82d9-49f6-822e-5b9aaa7b81da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportToCsv.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/ExportToCsv.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/TransToTsfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/TransToTsfile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,7 +113,7 @@
       <workItem from="1588020614058" duration="4045000" />
       <workItem from="1588192199593" duration="1932000" />
       <workItem from="1588273514592" duration="3315000" />
-      <workItem from="1588367644024" duration="1622000" />
+      <workItem from="1588367644024" duration="4926000" />
     </task>
     <servers />
   </component>

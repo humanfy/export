@@ -76,8 +76,18 @@ public class TransToTsfile
             			String line;
             			while ((line = csvReader.readLine()) != null)
             			{
-              				long time = Long.parseLong(line.split(",")[0]);
-              				TSRecord tsRecord = new TSRecord(time, device);
+            				long time =-1;
+            				try {
+								time = Long.parseLong(line.split(",")[0]);
+							}
+            				catch (Exception e)
+							{
+
+								LOGGER.error("Time error {} , csv:  {}", e,csvFile.getName());
+								e.printStackTrace();
+								continue;
+							}
+							TSRecord tsRecord = new TSRecord(time, device);
               				String[] points = Arrays.
 									copyOfRange(line.split(",", sensorList.size() + 1), 1, sensorList.size()+1);
              			 	for (int i = 0; i < points.length; i++)

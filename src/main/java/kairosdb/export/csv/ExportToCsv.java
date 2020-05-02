@@ -82,13 +82,13 @@ public class ExportToCsv
 					tmp.type = typ.get(tmp.metric);
 					metriclist.add(tmp);
 				}
-				session2.close();
 				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
 				for (long i = 0; i < dayNumber; i++)
 				{
 					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
 								downLatch, cluster, metriclist));
 				}
+				session2.close();
 			}
 			executorService.shutdown();
 			try
