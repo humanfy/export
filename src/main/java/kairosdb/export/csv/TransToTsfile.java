@@ -83,7 +83,8 @@ public class TransToTsfile
             				catch (Exception e)
 							{
 
-								LOGGER.error("Time error {} , csv:  {}", e,csvFile.getName());
+								LOGGER.error("File error: {}, csv:  {}, dirpath: {}, tspath: {}",
+										e,csvFile.getName(),dirPath,tsPath);
 								e.printStackTrace();
 								continue;
 							}
@@ -176,6 +177,14 @@ public class TransToTsfile
               				}
             			}
           			}
+          			catch(Exception e)
+					{
+
+						LOGGER.error("File error: {}, csv:  {}, dirpath: {}, tspath: {}",
+								e,csvFile.getName(),dirPath,tsPath);
+						e.printStackTrace();
+					}
+
         		}
       		}
 		}
