@@ -44,7 +44,7 @@ public class ExportToCsv
 	  		endTime = TimeUtils.convertDateStrToTimestamp(config.ENDED_TIME);
 	  		dayNumber = TimeUtils.timeRange(startTime, endTime);
 	  		CountDownLatch downLatch = new CountDownLatch(dayNumber);
-	  		cluster = Cluster.builder().addContactPoints("192.168.35.26").
+	  		cluster = Cluster.builder().addContactPoints("192.168.35.30").
 					withPort(9042).withCredentials("cassandra", "cassandra").build();
 	  		Session session = cluster.connect();
 
