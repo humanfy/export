@@ -27,14 +27,16 @@ public class ExportTsfileOneDay extends Thread
     private CountDownLatch downLatch;
     private Cluster cluster;
     private List<Metric> metriclist;
+    private String host;
 
     public ExportTsfileOneDay(long startTime, CountDownLatch downLatch, Cluster cluster,
-                              List<Metric>  metriclist)
+                              List<Metric>  metriclist, String host)
     {
         this.startTime = startTime;
         this.downLatch = downLatch;
         this.cluster = cluster;
         this.metriclist = metriclist;
+        this.host = host;
     }
 
     private void exportDataTable(Map<Long, List<Object>> dataTable, List<String> name, List<String> type, String csvname, String hostname)
@@ -404,10 +406,8 @@ public class ExportTsfileOneDay extends Thread
     {
         try
         {
-            String host = "";
             for (Metric metric : metriclist)
             {
-                host = metric.host;
                 exportOneMetricCsv(metric);
             }
             deleteFile(host);

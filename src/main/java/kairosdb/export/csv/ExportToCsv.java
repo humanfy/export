@@ -44,8 +44,28 @@ public class ExportToCsv
 	  		endTime = TimeUtils.convertDateStrToTimestamp(config.ENDED_TIME);
 	  		dayNumber = TimeUtils.timeRange(startTime, endTime);
 	  		CountDownLatch downLatch = new CountDownLatch(dayNumber);
-	  		cluster = Cluster.builder().addContactPoints("192.168.35.30").
-					withPort(9042).withCredentials("cassandra", "cassandra").build();
+	  		String[] machines = {"192.168.35.26","192.168.35.27",
+					"192.168.35.28","192.168.35.29","192.168.35.30"};
+	  		boolean isConnected = false;
+	  		for (int i=0; i<machines.length; i++)
+	  		{
+	  			if (isConnected)
+	  				break;
+	  			try
+				{
+					cluster = Cluster.builder().addContactPoints(machines[i]).
+							withPort(9042).withCredentials("cassandra", "cassandra").build();
+					isConnected = true;
+				}
+	  			catch (Exception e)
+				{
+					continue;
+				}
+			}
+	  		if (!isConnected)
+	  		{
+				LOGGER.error("Connect to Cassandra failed");
+			}
 	  		Session session = cluster.connect();
 
 	  		String cql = "SELECT * from sagittariuscty.metric;";
@@ -86,7 +106,7 @@ public class ExportToCsv
 				for (long i = 0; i < dayNumber; i++)
 				{
 					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
-								downLatch, cluster, metriclist));
+								downLatch, cluster, metriclist, host));
 				}
 				session2.close();
 			}
