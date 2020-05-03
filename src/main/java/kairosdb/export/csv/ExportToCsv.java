@@ -47,6 +47,7 @@ public class ExportToCsv
 	  		String[] machines = {"192.168.35.26","192.168.35.27",
 					"192.168.35.28","192.168.35.29","192.168.35.30"};
 	  		boolean isConnected = false;
+	  		Session session = null;
 	  		for (int i=0; i<machines.length; i++)
 	  		{
 	  			if (isConnected)
@@ -55,14 +56,11 @@ public class ExportToCsv
 				{
 					cluster = Cluster.builder().addContactPoints(machines[i]).
 							withPort(9042).withCredentials("cassandra", "cassandra").build();
+					session = cluster.connect();
 					isConnected = true;
 				}
 	  			catch (Exception e)
 				{
-					if (isConnected)
-					LOGGER.error("???");
-					else
-						LOGGER.error("123");
 					continue;
 				}
 			}
@@ -70,7 +68,6 @@ public class ExportToCsv
 	  		{
 				LOGGER.error("Connect to Cassandra failed");
 			}
-	  		Session session = cluster.connect();
 
 	  		String cql = "SELECT * from sagittariuscty.metric;";
 			ResultSet resultSet = session.execute(cql);
