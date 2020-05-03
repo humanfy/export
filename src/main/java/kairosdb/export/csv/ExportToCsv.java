@@ -59,6 +59,10 @@ public class ExportToCsv
 				}
 	  			catch (Exception e)
 				{
+					if (isConnected)
+					LOGGER.error("???");
+					else
+						LOGGER.error("123");
 					continue;
 				}
 			}
