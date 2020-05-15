@@ -25,7 +25,7 @@ public class InsertintoIotdb
 	{
 		try
 		{
-			Session session = new Session("127.0.0.1", 6667, "root", "root");
+			Session session = new Session("192.168.35.21", 6667, "root", "root");
 			session.open();
 			try
 			{

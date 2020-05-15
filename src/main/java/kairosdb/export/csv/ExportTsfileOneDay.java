@@ -419,6 +419,7 @@ public class ExportTsfileOneDay extends Thread
         }
         finally
         {
+            LOGGER.info("Host :{} date:{} is done",host,CalculateDate(startTime));
             downLatch.countDown();
         }
     }

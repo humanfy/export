@@ -49,6 +49,8 @@ public class ConfigDescriptor {
         config.INSERTINTOIOTDB = Boolean.parseBoolean(properties.getProperty("INSERTINTOIOTDB", "false"));
         config.THREAD_NUM = Integer.parseInt(properties.getProperty("THREAD_NUM", "128"));
         config.dirAbsolutePath = properties.getProperty("dirAbsolutePath", config.dirAbsolutePath);
+        config.HASH_NUM = Integer.parseInt(properties.getProperty("HASH_NUM", "0"));
+        config.TOTAL_HASH = Integer.parseInt(properties.getProperty("TOTAL_HASH", "10"));
       } catch (IOException e) {
         LOGGER.error("load properties error: ", e);
       }

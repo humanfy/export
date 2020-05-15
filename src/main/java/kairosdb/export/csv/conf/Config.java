@@ -8,6 +8,8 @@ public class Config {
   public boolean INSERTINTOIOTDB = false;
   public int THREAD_NUM = 128;
   public String dirAbsolutePath = "/data/fy/export/res";
+  public int HASH_NUM = 0;
+  public int TOTAL_HASH = 10;
 
   Config() {
   }
