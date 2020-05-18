@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="73c241fd-82d9-49f6-822e-5b9aaa7b81da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/startup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/bin/startup.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/conf/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/conf/config.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" afterDir="false" />
     </list>
@@ -117,7 +118,7 @@
       <workItem from="1588978937464" duration="635000" />
       <workItem from="1589152333105" duration="43000" />
       <workItem from="1589516590267" duration="2946000" />
-      <workItem from="1589725894274" duration="1617000" />
+      <workItem from="1589725894274" duration="5775000" />
     </task>
     <servers />
   </component>

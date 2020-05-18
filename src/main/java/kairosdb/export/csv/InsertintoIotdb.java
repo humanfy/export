@@ -40,7 +40,7 @@ public class InsertintoIotdb
 					int lines=0;
 					try(Stream<String> stream = Files.lines(Paths.get(String.valueOf(csvFile))))
 					{
-						lines = (int)stream.count()-1;
+						lines = (int)stream.filter(string->!string.isEmpty()).count();
 					}
 					catch (IOException e)
 					{
