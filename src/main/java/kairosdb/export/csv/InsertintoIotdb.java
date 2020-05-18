@@ -135,8 +135,20 @@ public class InsertintoIotdb
 							}
 						}
 					}
-					session.insertBatch(rowBatch);
-					rowBatch.reset();
+					for (int i = 0; i < 5; i++)
+					{
+						try
+						{
+							session.insertBatch(rowBatch);
+							break;
+						}
+						catch (Exception e)
+						{
+							if (i < 4) continue;
+							else throw e;
+						}
+					}
+
 				}
 				catch (Exception e)
 				{

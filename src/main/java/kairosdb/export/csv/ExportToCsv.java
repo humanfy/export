@@ -95,12 +95,13 @@ public class ExportToCsv
 					new LinkedBlockingQueue<>(tot*dayNumber));
 			session.close();
 
-			for (long i = 0; i < dayNumber; i++)
+
+			for (String host : hosts)
 			{
-				for (String host : hosts)
+				if (host.hashCode()%config.TOTAL_HASH != config.HASH_NUM)
+					continue;
+				for (long i = 0; i < dayNumber; i++)
 				{
-					if (host.hashCode()%config.TOTAL_HASH != config.HASH_NUM)
-						continue;
 					Session session2 = cluster.connect();
 					List<Metric> metriclist = new ArrayList();
 					cql = "SELECT * from sagittariuscty.latest where host = \'" + host + "\';";
