@@ -100,25 +100,25 @@ public class ExportToCsv
 			{
 				if (host.hashCode()%config.TOTAL_HASH != config.HASH_NUM)
 					continue;
+				Session session2 = cluster.connect();
+				List<Metric> metriclist = new ArrayList();
+				cql = "SELECT * from sagittariuscty.latest where host = \'" + host + "\';";
+				resultSet = session2.execute(cql);
+				for (Row row : resultSet)
+				{
+					Metric tmp = new Metric();
+					tmp.host = row.getString("host");
+					tmp.metric = row.getString("metric");
+					tmp.type = typ.get(tmp.metric);
+					metriclist.add(tmp);
+				}
+				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
 				for (long i = 0; i < dayNumber; i++)
 				{
-					Session session2 = cluster.connect();
-					List<Metric> metriclist = new ArrayList();
-					cql = "SELECT * from sagittariuscty.latest where host = \'" + host + "\';";
-					resultSet = session2.execute(cql);
-					for (Row row : resultSet) {
-						Metric tmp = new Metric();
-						tmp.host = row.getString("host");
-						tmp.metric = row.getString("metric");
-						tmp.type = typ.get(tmp.metric);
-						metriclist.add(tmp);
-					}
-					LOGGER.info("host {}: 数量 {}", host, metriclist.size());
 					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
 							downLatch, cluster, metriclist, host));
-
-					session2.close();
 				}
+				session2.close();
 			}
 			executorService.shutdown();
 			try
