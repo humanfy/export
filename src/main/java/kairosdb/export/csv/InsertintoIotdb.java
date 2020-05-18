@@ -46,6 +46,7 @@ public class InsertintoIotdb
 					{
 						e.printStackTrace();
 					}
+					LOGGER.info("totalline: {}, filename: {}, dirpath: {}",lines,csvFile.getName(),dirPath);
 					Schema schema = new Schema();
 					String device = csvFile.getName().replaceAll(".csv","");
 					String header = csvReader.readLine();
