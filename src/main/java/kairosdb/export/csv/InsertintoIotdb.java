@@ -145,7 +145,10 @@ public class InsertintoIotdb
 						catch (Exception e)
 						{
 							if (i < 4) continue;
-							else throw e;
+							else {
+								LOGGER.error("insertbatch error: {}", csvFile.getName());
+								e.printStackTrace();
+							}
 						}
 					}
 
