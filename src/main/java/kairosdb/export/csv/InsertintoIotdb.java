@@ -91,7 +91,7 @@ public class InsertintoIotdb
 						}
 						catch (Exception e)
 						{
-							LOGGER.error("insert error :{}, Line error : {}", csvFile.getName(),line);
+							//LOGGER.error("insert error :{}, Line error : {}", csvFile.getName(),line);
 							continue;
 						}
 						int row = rowBatch.batchSize++;

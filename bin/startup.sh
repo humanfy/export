@@ -26,6 +26,6 @@ else
 fi
 
 
-exec "$JAVA" -Xmx48g -Duser.timezone=GMT+8 -Dlogback.configurationFile=${EXPORT_CSV_HOME}/conf/logback.xml  -cp "$CLASSPATH" "$MAIN_CLASS" "$@"
+exec "$JAVA" -Xmx100g -Duser.timezone=GMT+8 -Dlogback.configurationFile=${EXPORT_CSV_HOME}/conf/logback.xml  -cp "$CLASSPATH" "$MAIN_CLASS" "$@"
 
 exit $?

@@ -84,10 +84,15 @@ public class ExportToCsv
 				hosts.add(row.getString("host"));
 
 			LOGGER.info("host数量: {}", hosts.size());
-
+			int tot = 0;
+			for (String host : hosts) {
+				if (host.hashCode() % config.TOTAL_HASH != config.HASH_NUM)
+					continue;
+				tot++;
+			}
 			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
-					new LinkedBlockingQueue<>(hosts.size()*dayNumber));
+					new LinkedBlockingQueue<>(tot*dayNumber));
 			session.close();
 
 			for (long i = 0; i < dayNumber; i++)
