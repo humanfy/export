@@ -4,11 +4,7 @@
     <list default="true" id="73c241fd-82d9-49f6-822e-5b9aaa7b81da" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/conf/config.properties" beforeDir="false" afterPath="$PROJECT_DIR$/conf/config.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/export-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/export-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kairosdb/export/csv/InsertintoIotdb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/InsertintoIotdb.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/kairosdb/export/csv/InsertintoIotdb.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/export-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/export-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -121,7 +117,8 @@
       <workItem from="1588978937464" duration="635000" />
       <workItem from="1589152333105" duration="43000" />
       <workItem from="1589516590267" duration="2946000" />
-      <workItem from="1589725894274" duration="11302000" />
+      <workItem from="1589725894274" duration="11926000" />
+      <workItem from="1589870180498" duration="74000" />
     </task>
     <servers />
   </component>
