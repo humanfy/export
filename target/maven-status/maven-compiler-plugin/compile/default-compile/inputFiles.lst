@@ -1,6 +1,7 @@
 /home/humanfy/桌面/export/src/main/java/kairosdb/export/csv/conf/Constants.java
 /home/humanfy/桌面/export/src/main/java/kairosdb/export/csv/ExportToCsv.java
 /home/humanfy/桌面/export/src/main/java/kairosdb/export/csv/TransToTsfile.java
+/home/humanfy/桌面/export/src/main/java/kairosdb/export/csv/Scpclient.java
 /home/humanfy/桌面/export/src/main/java/kairosdb/export/csv/conf/CommandCli.java
 /home/humanfy/桌面/export/src/main/java/kairosdb/export/csv/utils/TimeUtils.java
 /home/humanfy/桌面/export/src/main/java/kairosdb/export/csv/InsertintoIotdb.java

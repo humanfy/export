@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
 
+
 public class ExportTsfileOneDay extends Thread
 {
     private Config config = ConfigDescriptor.getInstance().getConfig();
@@ -28,15 +29,97 @@ public class ExportTsfileOneDay extends Thread
     private Cluster cluster;
     private List<Metric> metriclist;
     private String host;
+    private int hostNum;
+    private List<String> timeStr = new ArrayList<>();
+    private List<String> IPStr = new ArrayList<>();
+    private List<String> PathStr = new ArrayList<>();
 
     public ExportTsfileOneDay(long startTime, CountDownLatch downLatch, Cluster cluster,
-                              List<Metric>  metriclist, String host)
+                              List<Metric>  metriclist, String host, int hostNum)
     {
         this.startTime = startTime;
         this.downLatch = downLatch;
         this.cluster = cluster;
         this.metriclist = metriclist;
         this.host = host;
+        this.hostNum = hostNum;
+        timeStr.add("2019D182");
+        timeStr.add("2019D197");
+        timeStr.add("2019D213");
+        timeStr.add("2019D228");
+        timeStr.add("2019D244");
+        timeStr.add("2019D259");
+        timeStr.add("2019D274");
+        timeStr.add("2019D289");
+        timeStr.add("2019D305");
+        timeStr.add("2019D320");
+        timeStr.add("2019D335");
+        timeStr.add("2019D350");
+        timeStr.add("2020D1");
+        timeStr.add("2020D16");
+        timeStr.add("2020D32");
+        timeStr.add("2020D47");
+        timeStr.add("2020D61");
+        timeStr.add("2020D76");
+        timeStr.add("2020D92");
+        timeStr.add("2020D107");
+
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.22");
+        IPStr.add("192.168.35.44");
+        IPStr.add("192.168.35.44");
+        IPStr.add("192.168.35.44");
+        IPStr.add("192.168.35.44");
+
+        PathStr.add("/data1/20190701/fy/export/res/sequence");
+        PathStr.add("/data2/20190716/fy/export/res/sequence");
+        PathStr.add("/data3/20190801/fy/export/res/sequence");
+        PathStr.add("/data4/20190816/fy/export/res/sequence");
+        PathStr.add("/data5/20190901/fy/export/res/sequence");
+        PathStr.add("/data6/20190916/fy/export/res/sequence");
+        PathStr.add("/data1/20191001/fy/export/res/sequence");
+        PathStr.add("/data2/20191016/fy/export/res/sequence");
+        PathStr.add("/data3/20191101/fy/export/res/sequence");
+        PathStr.add("/data4/20191116/fy/export/res/sequence");
+        PathStr.add("/data5/20191201/fy/export/res/sequence");
+        PathStr.add("/data6/20191216/fy/export/res/sequence");
+        PathStr.add("/data1/20200101/fy/export/res/sequence");
+        PathStr.add("/data2/20200116/fy/export/res/sequence");
+        PathStr.add("/data3/20200201/fy/export/res/sequence");
+        PathStr.add("/data4/20200216/fy/export/res/sequence");
+        PathStr.add("/data1/20200101/fy/export/res/sequence");
+        PathStr.add("/data2/20200116/fy/export/res/sequence");
+        PathStr.add("/data3/20200201/fy/export/res/sequence");
+        PathStr.add("/data4/20200216/fy/export/res/sequence");
+
+    }
+
+    private void merge()
+    {
+        Scpclient scpclient = Scpclient.getInstance(getIPfromtime(startTime),22,"root", "tykj@2018");
+        File file = new File(config.tmpPath + File.separator + host);
+        if (!file.exists())
+        {
+            file.mkdirs();
+        }
+        scpclient.getFile(getPathfromtime(startTime) + File.separator + host + File.separator + startTime +"-0-0.tsfile",config.tmpPath + File.separator + host);
+        File file2 = new File(config.tmpPath + File.separator + host + File.separator + startTime + "-0-0.tsfile");
+        file2.renameTo(new File(config.tmpPath + File.separator + host + File.separator + (startTime + hostNum) + "-0-0.tsfile"));
+        InsertintoIotdb.loadintoIotdb(config.tmpPath + File.separator + host + File.separator + (startTime+hostNum) + "-0-0.tsfile");
     }
 
     private void exportDataTable(Map<Long, List<Object>> dataTable, List<String> name, List<String> type, String csvname, String hostname)
@@ -406,11 +489,18 @@ public class ExportTsfileOneDay extends Thread
     {
         try
         {
-            for (Metric metric : metriclist)
+            if (config.IS_MERGE)
             {
-                exportOneMetricCsv(metric);
+                merge();
             }
-            deleteFile(host);
+            else
+            {
+                for (Metric metric : metriclist)
+                {
+                    exportOneMetricCsv(metric);
+                }
+                deleteFile(host);
+            }
         }
         catch (Exception e)
         {
@@ -492,6 +582,31 @@ public class ExportTsfileOneDay extends Thread
         return "CTY";
     }
 
+    private String getIPfromtime(long time)
+    {
+        String str = CalculateDate(time);
+        String ret = null;
+        for (int i=0; i<timeStr.size(); i++)
+        {
+            if (str.compareTo(timeStr.get(i)) >= 0)
+                ret = IPStr.get(i);
+        }
+        return ret;
+    }
+
+    private String getPathfromtime(long time)
+    {
+
+        String str = CalculateDate(time);
+        String ret = null;
+        for (int i=0; i<timeStr.size(); i++)
+        {
+            if (str.compareTo(timeStr.get(i)) >= 0)
+                ret = PathStr.get(i);
+        }
+        return ret;
+    }
+
     public static Map<Long, List<Object>> sortMapByKey(Map<Long, List<Object>> map)
     {
         if (map == null)
@@ -502,6 +617,7 @@ public class ExportTsfileOneDay extends Thread
         sortMap.putAll(map);
         return sortMap;
     }
+
 
     static class MapKeyComparator implements Comparator<Long>
     {

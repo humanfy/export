@@ -1,8 +1,5 @@
 package kairosdb.export.csv;
 
-
-import kairosdb.export.csv.conf.Config;
-import kairosdb.export.csv.conf.ConfigDescriptor;
 import org.apache.iotdb.tsfile.file.metadata.enums.TSDataType;
 import org.apache.iotdb.tsfile.file.metadata.enums.TSEncoding;
 import org.apache.iotdb.tsfile.utils.Binary;
@@ -23,14 +20,12 @@ import java.util.stream.Stream;
 
 public class InsertintoIotdb
 {
-
-	private static Config config = ConfigDescriptor.getInstance().getConfig();
 	private static final Logger LOGGER = LoggerFactory.getLogger(TransToTsfile.class);
 	public static void insertintoIotdb(String dirPath)
 	{
 		try
 		{
-			Session session = new Session(config.IOTDB_IP, 6667, "root", "root");
+			Session session = new Session("192.168.35.43", 6667, "root", "root");
 			session.open();
 			if (!new File(dirPath).exists())
 			{
@@ -164,21 +159,6 @@ public class InsertintoIotdb
 					e.printStackTrace();
 				}
 			}
-			session.close();
-		}
-		catch (Exception e)
-		{
-			LOGGER.error("error occurs when writing to iotdb", e);
-			e.printStackTrace();
-		}
-	}
-	public static void loadintoIotdb(String filePath)
-	{
-		try
-		{
-			Session session = new Session(config.IOTDB_IP, 6667, "root", "root");
-			session.open();
-			session.executeNonQueryStatement("load "+filePath);
 			session.close();
 		}
 		catch (Exception e)

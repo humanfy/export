@@ -49,8 +49,11 @@ public class ConfigDescriptor {
         config.INSERTINTOIOTDB = Boolean.parseBoolean(properties.getProperty("INSERTINTOIOTDB", "false"));
         config.THREAD_NUM = Integer.parseInt(properties.getProperty("THREAD_NUM", "128"));
         config.dirAbsolutePath = properties.getProperty("dirAbsolutePath", config.dirAbsolutePath);
+        config.IOTDB_IP = properties.getProperty("IOTDB_IP", config.IOTDB_IP);
+        config.tmpPath = properties.getProperty("tmpPath", config.tmpPath);
         config.HASH_NUM = Integer.parseInt(properties.getProperty("HASH_NUM", "0"));
         config.TOTAL_HASH = Integer.parseInt(properties.getProperty("TOTAL_HASH", "10"));
+        config.IS_MERGE = Boolean.parseBoolean(properties.getProperty("IS_MERGE", "false"));
       } catch (IOException e) {
         LOGGER.error("load properties error: ", e);
       }

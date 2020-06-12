@@ -1,5 +1,6 @@
 kairosdb/export/csv/conf/ConfigDescriptor$1.class
 kairosdb/export/csv/ExportTsfileOneDay.class
+kairosdb/export/csv/Scpclient.class
 kairosdb/export/csv/Metric.class
 kairosdb/export/csv/utils/TimeUtils.class
 kairosdb/export/csv/conf/Constants.class

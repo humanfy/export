@@ -77,11 +77,17 @@ public class ExportToCsv
 
 			LOGGER.info("metric数量: {}", typ.size());
 
+			Map<String, Integer> v = new HashMap<>();
+			int totalhost = 0;
 			cql = "SELECT * from sagittariuscty.host;";
 			resultSet = session.execute(cql);
 			List<String> hosts = new ArrayList<>();
 			for (Row row : resultSet)
+			{
+				totalhost++;
 				hosts.add(row.getString("host"));
+				v.put(row.getString("host"),totalhost);
+			}
 
 			LOGGER.info("host数量: {}", hosts.size());
 			int tot = 0;
@@ -90,6 +96,7 @@ public class ExportToCsv
 					continue;
 				tot++;
 			}
+
 			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
 					new LinkedBlockingQueue<>(tot*dayNumber));
@@ -116,7 +123,7 @@ public class ExportToCsv
 				for (long i = 0; i < dayNumber; i++)
 				{
 					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
-							downLatch, cluster, metriclist, host));
+							downLatch, cluster, metriclist, host, v.get(host)));
 				}
 				session2.close();
 			}
