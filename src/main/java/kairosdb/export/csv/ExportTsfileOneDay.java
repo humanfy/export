@@ -101,6 +101,7 @@ public class ExportTsfileOneDay extends Thread
         {
             file.mkdirs();
         }
+        LOGGER.info("time: {}, ip: {}, path:{} ",startTime, getIPfromtime(startTime),getPathfromtime(startTime));
         scpclient.getFile(getPathfromtime(startTime) + File.separator + host + File.separator + startTime +"-0-0.tsfile",config.tmpPath + File.separator + host);
         File file2 = new File(config.tmpPath + File.separator + host + File.separator + startTime + "-0-0.tsfile");
         file2.renameTo(new File(config.tmpPath + File.separator + host + File.separator + (startTime + hostNum) + "-0-0.tsfile"));
