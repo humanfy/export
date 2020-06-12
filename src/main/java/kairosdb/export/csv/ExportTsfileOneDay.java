@@ -120,6 +120,11 @@ public class ExportTsfileOneDay extends Thread
         File file2 = new File(config.tmpPath + File.separator + host + File.separator + startTime + "-0-0.tsfile");
         file2.renameTo(new File(config.tmpPath + File.separator + host + File.separator + (startTime + hostNum) + "-0-0.tsfile"));
         InsertintoIotdb.loadintoIotdb(config.tmpPath + File.separator + host + File.separator + (startTime+hostNum) + "-0-0.tsfile");
+        if (config.DELETE_CSV)
+        {
+            File file3 = new File(config.tmpPath + File.separator + host + File.separator + (startTime + hostNum) + "-0-0.tsfile");
+            file3.delete();
+        }
     }
 
     private void exportDataTable(Map<Long, List<Object>> dataTable, List<String> name, List<String> type, String csvname, String hostname)
