@@ -101,10 +101,10 @@ public class ExportTsfileOneDay extends Thread
         PathStr.add("/data2/20200116/fy/export/res/sequence");
         PathStr.add("/data3/20200201/fy/export/res/sequence");
         PathStr.add("/data4/20200216/fy/export/res/sequence");
-        PathStr.add("/data1/20200101/fy/export/res/sequence");
-        PathStr.add("/data2/20200116/fy/export/res/sequence");
-        PathStr.add("/data3/20200201/fy/export/res/sequence");
-        PathStr.add("/data4/20200216/fy/export/res/sequence");
+        PathStr.add("/data1/20200301/fy/export/res/sequence");
+        PathStr.add("/data2/20200316/fy/export/res/sequence");
+        PathStr.add("/data3/20200401/fy/export/res/sequence");
+        PathStr.add("/data4/20200416/fy/export/res/sequence");
 
     }
 
