@@ -95,7 +95,7 @@ public class ExportTsfileOneDay extends Thread
 
     private void merge()
     {
-        Scpclient scpclient = Scpclient.getInstance(getIPfromtime(startTime),22,"root", "tykj@2018");
+        Scpclient scpclient = new Scpclient(getIPfromtime(startTime),22,"root", "tykj@2018");
         File file = new File(config.tmpPath + File.separator + host);
         if (!file.exists())
         {

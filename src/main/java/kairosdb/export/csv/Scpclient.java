@@ -9,15 +9,7 @@ import java.io.IOException;
 
 public class Scpclient {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ExportToCsv.class);
-	static private Scpclient instance;
 
-	static synchronized public Scpclient getInstance(String IP, int port,
-													 String username, String passward) {
-		if (instance == null) {
-			instance = new Scpclient(IP, port, username, passward);
-		}
-		return instance;
-	}
 
 	public Scpclient(String IP, int port, String username, String passward) {
 		this.ip = IP;
