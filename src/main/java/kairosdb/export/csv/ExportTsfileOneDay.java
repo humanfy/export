@@ -43,6 +43,7 @@ public class ExportTsfileOneDay extends Thread
         this.metriclist = metriclist;
         this.host = host;
         this.hostNum = hostNum;
+
         timeStr.add("2019D182");
         timeStr.add("2019D197");
         timeStr.add("2019D213");

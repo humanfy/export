@@ -44,7 +44,7 @@ public class Scpclient {
 			client.get(remoteFile, localTargetDirectory);
 			conn.close();
 		} catch ( IOException e) {
-			LOGGER.error("Remotefile: {},Errormsg: {} ",remoteFile, e.getMessage());
+			LOGGER.error("IP:{}, Remotefile: {},Errormsg: {} ",ip ,remoteFile, e.getMessage());
 		}
 	}
 
