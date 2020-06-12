@@ -178,7 +178,14 @@ public class InsertintoIotdb
 		{
 			Session session = new Session(config.IOTDB_IP, 6667, "root", "root");
 			session.open();
-			session.executeNonQueryStatement("load "+filePath);
+			try
+			{
+				session.executeNonQueryStatement("load " + filePath);
+			}
+			catch (Exception e)
+			{
+
+			}
 			session.close();
 		}
 		catch (Exception e)
