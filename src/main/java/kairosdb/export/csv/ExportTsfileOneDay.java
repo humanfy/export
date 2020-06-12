@@ -55,13 +55,13 @@ public class ExportTsfileOneDay extends Thread
         timeStr.add("2019D320");
         timeStr.add("2019D335");
         timeStr.add("2019D350");
-        timeStr.add("2020D1");
-        timeStr.add("2020D16");
-        timeStr.add("2020D32");
-        timeStr.add("2020D47");
-        timeStr.add("2020D61");
-        timeStr.add("2020D76");
-        timeStr.add("2020D92");
+        timeStr.add("2020D001");
+        timeStr.add("2020D016");
+        timeStr.add("2020D032");
+        timeStr.add("2020D047");
+        timeStr.add("2020D061");
+        timeStr.add("2020D076");
+        timeStr.add("2020D092");
         timeStr.add("2020D107");
 
         IPStr.add("192.168.35.22");
@@ -180,7 +180,7 @@ public class ExportTsfileOneDay extends Thread
 
     private void exportOneMetricCsv(Metric metric)
     {
-        String date = CalculateDate(startTime);
+        String date = CalculateDate(startTime,false);
         Session session = cluster.connect();
         Map<Long, List<Object>> dataTable =  new TreeMap<>();
         List<String> name = new ArrayList<>();
@@ -496,6 +496,7 @@ public class ExportTsfileOneDay extends Thread
         {
             if (config.IS_MERGE)
             {
+                if (metriclist.size()!=0)
                 merge();
             }
             else
@@ -514,7 +515,7 @@ public class ExportTsfileOneDay extends Thread
         }
         finally
         {
-            LOGGER.info("Host :{} date:{} is done",host,CalculateDate(startTime));
+            LOGGER.info("Host :{} date:{} is done",host,CalculateDate(startTime,false));
             downLatch.countDown();
         }
     }
@@ -548,7 +549,7 @@ public class ExportTsfileOneDay extends Thread
         }
     }
 
-    private String CalculateDate(long time)
+    private String CalculateDate(long time,Boolean completion)
     {
         int year = 2020;
         String str = year+"-01-01 00:00:00";
@@ -579,7 +580,15 @@ public class ExportTsfileOneDay extends Thread
             }
             now = date.getTime();
         }
-        return year+"D"+ ((time - now) / Constants.TIME_DAY + 1);
+        if (completion)
+        {
+            if (((time - now) / Constants.TIME_DAY + 1) < 10)
+                return year + "D00" + ((time - now) / Constants.TIME_DAY + 1);
+            else if (((time - now) / Constants.TIME_DAY + 1) < 100)
+                return year + "D0" + ((time - now) / Constants.TIME_DAY + 1);
+            else return year + "D" + ((time - now) / Constants.TIME_DAY + 1);
+        }
+        else return year + "D" + ((time - now) / Constants.TIME_DAY + 1);
     }
 
     private String getUsername()
@@ -589,7 +598,7 @@ public class ExportTsfileOneDay extends Thread
 
     private String getIPfromtime(long time)
     {
-        String str = CalculateDate(time);
+        String str = CalculateDate(time,true);
         String ret = null;
         for (int i=0; i<timeStr.size(); i++)
         {
@@ -602,7 +611,7 @@ public class ExportTsfileOneDay extends Thread
     private String getPathfromtime(long time)
     {
 
-        String str = CalculateDate(time);
+        String str = CalculateDate(time,true);
         String ret = null;
         for (int i=0; i<timeStr.size(); i++)
         {

@@ -38,42 +38,36 @@ public class ExportToCsv
 		{
 	  		new File(config.dirAbsolutePath + File.separator + Constants.CSV_DIR).mkdir();
 		}
-		if (!config.START_TIME.equals("") && !config.ENDED_TIME.equals(""))
-		{
-	  		startTime = TimeUtils.convertDateStrToTimestamp(config.START_TIME);
-	  		endTime = TimeUtils.convertDateStrToTimestamp(config.ENDED_TIME);
-	  		dayNumber = TimeUtils.timeRange(startTime, endTime);
-	  		CountDownLatch downLatch = new CountDownLatch(dayNumber);
-	  		String[] machines = {"192.168.35.26","192.168.35.27",
-					"192.168.35.28","192.168.35.29","192.168.35.30"};
-	  		boolean isConnected = false;
-	  		Session session = null;
-	  		for (int i=0; i<machines.length; i++)
-	  		{
-	  			if (isConnected)
-	  				break;
-	  			try
-				{
+		if (!config.START_TIME.equals("") && !config.ENDED_TIME.equals("")) {
+			startTime = TimeUtils.convertDateStrToTimestamp(config.START_TIME);
+			endTime = TimeUtils.convertDateStrToTimestamp(config.ENDED_TIME);
+			dayNumber = TimeUtils.timeRange(startTime, endTime);
+			CountDownLatch downLatch = new CountDownLatch(dayNumber);
+			String[] machines = {"192.168.35.26", "192.168.35.27",
+					"192.168.35.28", "192.168.35.29", "192.168.35.30"};
+			boolean isConnected = false;
+			Session session = null;
+			for (int i = 0; i < machines.length; i++) {
+				if (isConnected)
+					break;
+				try {
 					cluster = Cluster.builder().addContactPoints(machines[i]).
 							withPort(9042).withCredentials("cassandra", "cassandra").build();
 					session = cluster.connect();
 					isConnected = true;
-				}
-	  			catch (Exception e)
-				{
+				} catch (Exception e) {
 					continue;
 				}
 			}
-	  		if (!isConnected)
-	  		{
+			if (!isConnected) {
 				LOGGER.error("Connect to Cassandra failed");
 			}
 
-	  		String cql = "SELECT * from sagittariuscty.metric;";
+			String cql = "SELECT * from sagittariuscty.metric;";
 			ResultSet resultSet = session.execute(cql);
-			Map<String,String> typ = new HashMap<>();
+			Map<String, String> typ = new HashMap<>();
 			for (Row row : resultSet)
-				typ.put(row.getString("metric"),row.getString("value_type"));
+				typ.put(row.getString("metric"), row.getString("value_type"));
 
 			LOGGER.info("metric数量: {}", typ.size());
 
@@ -82,11 +76,10 @@ public class ExportToCsv
 			cql = "SELECT * from sagittariuscty.host;";
 			resultSet = session.execute(cql);
 			List<String> hosts = new ArrayList<>();
-			for (Row row : resultSet)
-			{
+			for (Row row : resultSet) {
 				totalhost++;
 				hosts.add(row.getString("host"));
-				v.put(row.getString("host"),totalhost);
+				v.put(row.getString("host"), totalhost);
 			}
 
 			LOGGER.info("host数量: {}", hosts.size());
@@ -99,20 +92,20 @@ public class ExportToCsv
 
 			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
-					new LinkedBlockingQueue<>(tot*dayNumber));
+					new LinkedBlockingQueue<>(tot * dayNumber));
 			session.close();
 
-
-			for (String host : hosts)
+			for (long i = 0; i < dayNumber; i++)
 			{
-				if (host.hashCode()%config.TOTAL_HASH != config.HASH_NUM)
+
+			for (String host : hosts) {
+				if (host.hashCode() % config.TOTAL_HASH != config.HASH_NUM)
 					continue;
 				Session session2 = cluster.connect();
 				List<Metric> metriclist = new ArrayList();
 				cql = "SELECT * from sagittariuscty.latest where host = \'" + host + "\';";
 				resultSet = session2.execute(cql);
-				for (Row row : resultSet)
-				{
+				for (Row row : resultSet) {
 					Metric tmp = new Metric();
 					tmp.host = row.getString("host");
 					tmp.metric = row.getString("metric");
@@ -120,13 +113,12 @@ public class ExportToCsv
 					metriclist.add(tmp);
 				}
 				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
-				for (long i = 0; i < dayNumber; i++)
-				{
-					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
-							downLatch, cluster, metriclist, host, v.get(host)));
-				}
+				executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
+						downLatch, cluster, metriclist, host, v.get(host)));
+
 				session2.close();
 			}
+		}
 			executorService.shutdown();
 			try
 			{
