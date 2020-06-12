@@ -65,26 +65,10 @@ public class ExportTsfileOneDay extends Thread
         timeStr.add("2020D092");
         timeStr.add("2020D107");
 
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.22");
-        IPStr.add("192.168.35.44");
-        IPStr.add("192.168.35.44");
-        IPStr.add("192.168.35.44");
-        IPStr.add("192.168.35.44");
+        for (int i=0;i<16;i++)
+            IPStr.add("192.168.35.22");
+        for (int i=0;i<4;i++)
+            IPStr.add("192.168.35.44");
 
         PathStr.add("/data1/20190701/fy/export/res/sequence");
         PathStr.add("/data2/20190716/fy/export/res/sequence");
