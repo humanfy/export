@@ -497,7 +497,7 @@ public class ExportTsfileOneDay extends Thread
             if (config.IS_MERGE)
             {
                 if (metriclist.size()!=0)
-                merge();
+                    merge();
             }
             else
             {
