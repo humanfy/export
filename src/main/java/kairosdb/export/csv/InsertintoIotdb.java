@@ -174,13 +174,16 @@ public class InsertintoIotdb
 	}
 	public static void loadintoIotdb(String filePath)
 	{
+		long LIMIT = 64;
 		try
 		{
 			Session session = new Session(config.IOTDB_IP, 6667, "root", "root");
 			session.open();
 			try
 			{
-				session.executeNonQueryStatement("load " + filePath);
+				File f = new File(filePath);
+				if (f.length()>=LIMIT)
+					session.executeNonQueryStatement("load " + filePath);
 			}
 			catch (Exception e)
 			{

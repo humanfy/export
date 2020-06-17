@@ -97,7 +97,7 @@ public class ExportToCsv
 				tot++;
 			}
 
-			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 1024,
+			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 10,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
 					new LinkedBlockingQueue<>(tot*dayNumber));
 			session.close();
