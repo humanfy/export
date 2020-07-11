@@ -18,7 +18,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
-
+import static kairosdb.export.csv.ExportToCsv.totalhashedhost;
+import static kairosdb.export.csv.ExportToCsv.countmerge;
 
 public class ExportTsfileOneDay extends Thread
 {
@@ -30,12 +31,13 @@ public class ExportTsfileOneDay extends Thread
     private List<Metric> metriclist;
     private String host;
     private int hostNum;
+    private int dayNum;
     private List<String> timeStr = new ArrayList<>();
     private List<String> IPStr = new ArrayList<>();
     private List<String> PathStr = new ArrayList<>();
 
     public ExportTsfileOneDay(long startTime, CountDownLatch downLatch, Cluster cluster,
-                              List<Metric>  metriclist, String host, int hostNum)
+                              List<Metric>  metriclist, String host, int hostNum, int dayNum)
     {
         this.startTime = startTime;
         this.downLatch = downLatch;
@@ -43,7 +45,7 @@ public class ExportTsfileOneDay extends Thread
         this.metriclist = metriclist;
         this.host = host;
         this.hostNum = hostNum;
-
+        this.dayNum = dayNum;
         timeStr.add("2019D182");
         timeStr.add("2019D197");
         timeStr.add("2019D213");
@@ -93,7 +95,7 @@ public class ExportTsfileOneDay extends Thread
 
     }
 
-    private void merge()
+    private void oldmerge()
     {
         Scpclient scpclient = new Scpclient(getIPfromtime(startTime),22,"root", "tykj@2018");
         File file = new File(config.tmpPath + File.separator + host);
@@ -105,11 +107,27 @@ public class ExportTsfileOneDay extends Thread
         scpclient.getFile(getPathfromtime(startTime) + File.separator + host + File.separator + startTime +"-0-0.tsfile",config.tmpPath + File.separator + host);
         File file2 = new File(config.tmpPath + File.separator + host + File.separator + startTime + "-0-0.tsfile");
         file2.renameTo(new File(config.tmpPath + File.separator + host + File.separator + (startTime + hostNum) + "-0-0.tsfile"));
-        InsertintoIotdb.loadintoIotdb(config.tmpPath + File.separator + host + File.separator + (startTime+hostNum) + "-0-0.tsfile");
+        InsertintoIotdb.oldloadintoIotdb(config.tmpPath + File.separator + host + File.separator + (startTime+hostNum) + "-0-0.tsfile");
         if (config.DELETE_CSV)
         {
             File file3 = new File(config.tmpPath + File.separator + host + File.separator + (startTime + hostNum) + "-0-0.tsfile");
             file3.delete();
+        }
+    }
+
+    private void merge()
+    {
+        Scpclient scpclient = new Scpclient(getIPfromtime(startTime),22,"root", "tykj@2018");
+        File file = new File(config.tmpPath + File.separator + host);
+        if (!file.exists())
+        {
+            file.mkdirs();
+        }
+        scpclient.getFile(getPathfromtime(startTime) + File.separator + host + File.separator + startTime +"-0-0.tsfile",config.tmpPath + File.separator + host);
+        long now = countmerge.get(dayNum).incrementAndGet();
+        if (now == totalhashedhost)
+        {
+            InsertintoIotdb.loadintoIotdb(startTime);
         }
     }
 
@@ -577,7 +595,7 @@ public class ExportTsfileOneDay extends Thread
         else return year + "D" + ((time - now) / Constants.TIME_DAY + 1);
     }
 
-    private String getUsername()
+    public static String getUsername()
     {
         return "CTY";
     }

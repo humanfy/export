@@ -10,6 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+
 import kairosdb.export.csv.conf.CommandCli;
 import kairosdb.export.csv.conf.Config;
 import kairosdb.export.csv.conf.ConfigDescriptor;
@@ -20,6 +22,9 @@ import org.slf4j.LoggerFactory;
 import com.datastax.driver.core.*;
 public class ExportToCsv
 {
+	public static int totalhashedhost = 0;
+	public static List<AtomicLong> countmerge = new ArrayList<>();
+	public static Map<String,List<Metric>> metriclists = new HashMap<>();
   	private static Config config;
   	private static final Logger LOGGER = LoggerFactory.getLogger(ExportToCsv.class);
   	private static long startTime;
@@ -43,7 +48,8 @@ public class ExportToCsv
 	  		startTime = TimeUtils.convertDateStrToTimestamp(config.START_TIME);
 	  		endTime = TimeUtils.convertDateStrToTimestamp(config.ENDED_TIME);
 	  		dayNumber = TimeUtils.timeRange(startTime, endTime);
-	  		CountDownLatch downLatch = new CountDownLatch(dayNumber);
+	  		for (int i=0;i<dayNumber;i++)
+	  			countmerge.add(new AtomicLong(0));
 	  		String[] machines = {"192.168.35.26","192.168.35.27",
 					"192.168.35.28","192.168.35.29","192.168.35.30"};
 	  		boolean isConnected = false;
@@ -90,18 +96,17 @@ public class ExportToCsv
 			}
 
 			LOGGER.info("host数量: {}", hosts.size());
-			int tot = 0;
 			for (String host : hosts) {
 				if (host.hashCode() % config.TOTAL_HASH != config.HASH_NUM)
 					continue;
-				tot++;
+				totalhashedhost++;
 			}
+			CountDownLatch downLatch = new CountDownLatch(dayNumber*totalhashedhost);
 
-			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, 10,
+			ExecutorService executorService = new ThreadPoolExecutor(config.THREAD_NUM, config.THREAD_NUM,
 					Long.MAX_VALUE, TimeUnit.SECONDS,
-					new LinkedBlockingQueue<>(tot*dayNumber));
+					new LinkedBlockingQueue<>(totalhashedhost*dayNumber));
 			session.close();
-
 
 			for (String host : hosts)
 			{
@@ -120,12 +125,19 @@ public class ExportToCsv
 					metriclist.add(tmp);
 				}
 				LOGGER.info("host {}: 数量 {}", host, metriclist.size());
-				for (long i = 0; i < dayNumber; i++)
-				{
-					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
-							downLatch, cluster, metriclist, host, v.get(host)));
-				}
+				metriclists.put(host,metriclist);
+
 				session2.close();
+			}
+
+			for (int i = 0; i < dayNumber; i++)
+			{
+				for (String host : hosts)
+				{
+					if (host.hashCode()%config.TOTAL_HASH != config.HASH_NUM) continue;
+					executorService.submit(new ExportTsfileOneDay(startTime + i * Constants.TIME_DAY,
+							downLatch, cluster, metriclists.get(host), host, v.get(host), i));
+				}
 			}
 			executorService.shutdown();
 			try
